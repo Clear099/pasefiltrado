@@ -879,3 +879,49 @@ def render_photo(post: dict, photo: dict, out: Path, match: dict | None = None, 
     fh = font("label", 24)
     paint(d, (s(W - 62) - fh.getlength(B.HANDLE), s(y - 3)), B.HANDLE, fh, B.DEGRADE)
     return finish(img, out)
+
+
+# ---------------------------------------------------------------- historias (9:16)
+
+STORY_SIZE = (1080, 1920)
+STORY_LABELS = {"match": "RESULTADO FINAL", "preview": "PARTIDO DEL DÍA", "results": "LA FECHA EN 1 MINUTO",
+                "news": "ÚLTIMA NOTICIA", "agenda": "PARTIDOS DE HOY", "intro": "BIENVENIDO"}
+
+
+def render_story(post_image: Path, key: str, out: Path) -> Path:
+    """Historia a partir de la portada del post: fondo de marca, etiqueta y el post en grande.
+
+    La API no permite stickers ni enlaces al post, así que la historia invita a ir al perfil.
+    """
+    W, H = STORY_SIZE
+    img, d = canvas(STORY_SIZE)
+    if not BACKGROUND:
+        pitch_pattern(d, STORY_SIZE)
+    speedlines(d, W, 10, 380, gap=15)
+    logo_mark(d, 62, 70, 110)
+    f = font("display", 54)
+    paint(d, (s(196), s(96)), "PASE", f, B.TEXTO)
+    paint(d, (s(196) + klen("PASE ", f), s(96)), "FILTRADO", f, B.ACENTO)
+    label = STORY_LABELS.get(key.split(":", 1)[0], "NUEVO POST")
+    kicker_block(d, 62, 230, label)
+
+    post = Image.open(post_image).convert("RGB")
+    pw = W - 124
+    ph = int(post.height * pw / post.width)
+    post = post.resize((s(pw), s(ph)), Image.LANCZOS)
+    py = 330
+    shadow = Image.new("L", (post.width + s(60), post.height + s(60)), 0)
+    ImageDraw.Draw(shadow).rectangle([s(30), s(30), s(30) + post.width, s(30) + post.height], fill=200)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(s(18)))
+    img.paste(Image.new("RGB", shadow.size, (0, 0, 0)), (s(62) - s(30), s(py) - s(20)), shadow)
+    img.paste(post, (s(62), s(py)))
+    d.rectangle([s(62), s(py), s(62) + post.width / 1, s(py) + post.height], outline=B.ACENTO, width=s(3))
+
+    y = py + ph + 70
+    fc = font("display", 64)
+    txt = case("Míralo completo en el perfil")
+    paint(d, (s(W / 2) - klen(txt, fc) / 2, s(y)), txt, fc, B.TEXTO)
+    fh = font("display", 58)
+    paint(d, (s(W / 2) - klen(B.HANDLE, fh) / 2, s(y + 90)), B.HANDLE, fh, B.ACENTO)
+    d.rectangle([0, s(H - 12), s(W), s(H)], fill=B.ACENTO)
+    return finish(img, out)

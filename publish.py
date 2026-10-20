@@ -127,6 +127,14 @@ def main() -> None:
                 failed.append(entry)
             continue
         print(f"[publicado] {entry['key']} → {media_id}")
+        if entry.get("story"):
+            try:
+                story = ig("POST", f"{user_id()}/media", image_url=f"{base}/{entry['story']}", media_type="STORIES")["id"]
+                wait_ready(story, entry["story"])
+                ig("POST", f"{user_id()}/media_publish", creation_id=story)
+                print(f"[historia] {entry['key']}")
+            except (RuntimeError, requests.RequestException) as e:
+                print(f"[historia] no se pudo publicar: {e}")  # la historia nunca bloquea el post
         history.append({"key": entry["key"], "title": entry["title"], "image": entry.get("image") or entry["images"][0],
                         "media_id": media_id, "date": dt.datetime.now(TZ).isoformat()})
         if i + 1 < min(len(pending), args.max):

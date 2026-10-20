@@ -396,6 +396,12 @@ def main() -> None:
     created = dt.datetime.now(TZ).isoformat()
     for e in entries:
         e["created"] = created
+        # cada post lleva su historia: la portada en 9:16 invitando al perfil
+        if CFG.get("historias", True):
+            first = ROOT / (e.get("image") or e["images"][0])
+            story = first.with_name(first.stem + "-historia.jpg")
+            render.render_story(first, e["key"], story)
+            e["story"] = rel(story)
     pending = load("pending.json", [])
     pending += entries
     save("pending.json", pending)
