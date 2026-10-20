@@ -45,10 +45,10 @@ jobs:
             echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: steps.check.outputs.run != 'false'
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         if: steps.check.outputs.run != 'false'
         with:
           python-version: "3.12"
@@ -92,6 +92,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add -A
           git diff --cached --quiet || git commit -m "posts ${{ steps.slot.outputs.slot }} $(date -u +%F)"
+          git pull --rebase --autostash -q
           git push
 
       - name: Publicar en Instagram
@@ -107,4 +108,5 @@ jobs:
         run: |
           git add -A
           git diff --cached --quiet || git commit -m "historial $(date -u +%F)"
+          git pull --rebase --autostash -q
           git push

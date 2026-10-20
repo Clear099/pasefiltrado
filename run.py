@@ -129,7 +129,12 @@ def duel(m: dict) -> str:
 
 # ---------------------------------------------------------------- noticias
 
-def slot_news(out_dir: Path, n: int, focus: str | None = None, only_important: bool = False) -> list[dict]:
+def slot_news(out_dir: Path, n: int, focus: str | None = None, only_important: bool = False,
+              allow_basic: bool = False) -> list[dict]:
+    if not writer.has_ai() and not allow_basic:
+        # sin Claude solo saldría el titular del medio tal cual: mejor no publicar noticias
+        print("[noticias] sin ANTHROPIC_API_KEY: no se publican noticias")
+        return []
     done = already_queued_or_posted()
     done_titles = [h["title"] for h in done]
     max_age = 2 if only_important else CFG["max_news_age_hours"]
@@ -350,7 +355,7 @@ def main() -> None:
     elif args.slot == "resultados":
         entries = slot_results(out_dir, today)
     else:
-        entries = slot_morning(out_dir, today) + slot_news(out_dir, 2) \
+        entries = slot_morning(out_dir, today) + slot_news(out_dir, 2, allow_basic=True) \
             + slot_results(out_dir, today - dt.timedelta(days=2))
         for e in entries:
             print(f"\n=== {e.get('images') or e['image']}\n{e['caption']}")
