@@ -246,11 +246,88 @@ def preview_poll(m: dict, out: Path, i: int, n: int) -> Path:
     return R.finish(img, out)
 
 
+def compare_rows(d, rows, y: float, step: float = 92):
+    """Filas comparadas estilo Google: valor local | etiqueta | valor visita, barra desde el centro.
+
+    rows: (etiqueta, local, visita, menor_es_mejor)."""
+    fv, fl = font("score", 46), font("label", 22)
+    for label, hv, av, lower_better in rows:
+        better_h = hv < av if lower_better else hv > av
+        better_a = av < hv if lower_better else av > hv
+        tracked(d, (s(W / 2) - tracked_len(label.upper(), fl, 3) / 2, s(y)), label.upper(), fl, B.SECUNDARIO, 3)
+        fmt = lambda v: f"{v:g}"
+        paint(d, (s(62), s(y + 24)), fmt(hv), fv, B.TEXTO if not better_a else B.SECUNDARIO)
+        paint(d, (s(W - 62) - fv.getlength(fmt(av)), s(y + 24)), fmt(av), fv, B.TEXTO if not better_h else B.SECUNDARIO)
+        bar_w, x0, by = W - 124 - 2 * 110, 62 + 110, y + 46
+        half = bar_w / 2
+        d.rectangle([s(x0), s(by), s(x0 + bar_w), s(by + 12)], fill=B.GRAFITO)
+        # con "menor es mejor" la barra muestra lo bueno: se invierte la proporción
+        vh, va = (av, hv) if lower_better else (hv, av)
+        top_v = max(vh, va) or 1
+        if vh:
+            d.rectangle([s(x0 + half - 3 - (half - 3) * vh / top_v), s(by), s(x0 + half - 3), s(by + 12)],
+                        fill=B.ACENTO if better_h else B.SECUNDARIO)
+        if va:
+            d.rectangle([s(x0 + half + 3), s(by), s(x0 + half + 3 + (half - 3) * va / top_v), s(by + 12)],
+                        fill=B.ACENTO if better_a else B.SECUNDARIO)
+        y += step
+    return y
+
+
+def preview_numbers(m: dict, summary: dict, out: Path, i: int, n: int) -> Path:
+    """Duelo en números: los dos equipos comparados en sus últimos 5 partidos y en la tabla."""
+    import datos
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "ÚLTIMOS 5 PARTIDOS")
+    y = _title(d, "Duelo en números", ["números"]) + 40
+    for team, x, right in ((m["home"], 62, False), (m["away"], W - 62, True)):
+        R.mini_crest(d, team, x + (-30 if right else 30), y + 30, 60)
+        fn = font("display", 44)
+        name = case(team["name"])
+        px = s(x - 76) - R.klen(name, fn) if right else s(x + 76)
+        paint(d, (px, s(y + 6)), name, fn, B.TEXTO)
+    compare_rows(d, datos.numbers_table(m, summary), y + 120, 120)
+    fl = font("label", 18)
+    tracked(d, (s(62), s(H - 160)), "EN ROJO, QUIEN ESTÁ MEJOR EN CADA DATO", fl, B.SECUNDARIO, 2)
+    R.footer(d, "ESPN")
+    return R.finish(img, out)
+
+
+def preview_facts(m: dict, facts: list[dict], out: Path, i: int, n: int) -> Path:
+    """El dato que nadie te cuenta: hasta 3 datos con una cifra grande cada uno."""
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "EL DATO", filled=True)
+    y = _title(d, "Lo que nadie te cuenta", ["nadie"]) + 40
+    box_h = min(250, (H - 170 - y) / max(len(facts), 1) - 22)
+    for f in facts:
+        d.rectangle([s(62), s(y), s(W - 62), s(y + box_h)], fill=B.GRAFITO)
+        d.rectangle([s(62), s(y), s(70), s(y + box_h)], fill=B.ACENTO)
+        fnum, _, nsize = R.fit_text(f["numero"], "score", 300, 1, 150, 70)
+        _, top, _, bottom = fnum.getbbox(f["numero"])
+        paint(d, (s(100), s(y + box_h / 2) - (top + bottom) / 2), f["numero"], fnum, B.DEGRADE)
+        x = 100 + max(R.text_w(f["numero"], fnum), 120) + 40
+        ft, lines, size = R.fit_text(case(f["texto"]), "display", int(W - 62 - 30 - x), 3, 50, 30)
+        ty = y + box_h / 2 - size * 1.05 * len(lines) / 2
+        for line in lines:
+            paint(d, (s(x), s(ty)), line, ft, B.TEXTO)
+            ty += size * 1.05
+        y += box_h + 22
+    R.footer(d, "ESPN · CÁLCULOS PROPIOS")
+    return R.finish(img, out)
+
+
 def preview_carousel(m: dict, summary: dict, out_dir: Path) -> list[Path]:
-    """Carrusel completo de previa: portada, forma, historial, goleadores y pronóstico."""
+    """Carrusel completo de previa: portada, datos propios, forma, duelo en números, historial,
+    goleadores y pronóstico."""
+    import datos
     slug = f"previa-{m['id']}"
-    builders = [lambda p, i, n: preview_cover(m, p, n),
-                lambda p, i, n: preview_form(m, summary, p, i, n)]
+    facts = datos.pick(m, summary)
+    builders = [lambda p, i, n: preview_cover(m, p, n)]
+    if facts:
+        builders.append(lambda p, i, n: preview_facts(m, facts, p, i, n))
+    builders.append(lambda p, i, n: preview_form(m, summary, p, i, n))
+    if datos.numbers_table(m, summary):
+        builders.append(lambda p, i, n: preview_numbers(m, summary, p, i, n))
     if (summary.get("h2h") or {}).get("games"):
         builders.append(lambda p, i, n: preview_h2h(m, summary, p, i, n))
     if summary.get("leaders"):

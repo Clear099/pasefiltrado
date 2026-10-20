@@ -78,8 +78,8 @@ def fetch_news(feeds: list[dict], max_age_hours: int) -> list[dict]:
 def _team(c: dict) -> dict:
     t = c["team"]
     return {
-        "name": t.get("shortDisplayName") or t.get("displayName"),
-        "full_name": t.get("displayName"),
+        "name": (t.get("shortDisplayName") or t.get("displayName") or "").strip(),
+        "full_name": (t.get("displayName") or "").strip(),
         "score": c.get("score", "0"),
         "color": t.get("color"),
         "id": t.get("id"),
@@ -199,6 +199,10 @@ def match_summary(m: dict) -> dict:
             "result": {"W": "G", "D": "E", "L": "P"}.get(e.get("gameResult"), "·"),
             "score": e.get("score", ""),
             "opponent": e.get("opponent", {}).get("displayName", ""),
+            "home": e.get("atVs") != "@",
+            "gf": int(e.get("homeTeamScore" if e.get("atVs") != "@" else "awayTeamScore") or 0),
+            "ga": int(e.get("awayTeamScore" if e.get("atVs") != "@" else "homeTeamScore") or 0),
+            "competition": e.get("leagueName", ""),
             "opponent_team": {"name": e.get("opponent", {}).get("abbreviation", ""),
                               "logo": e.get("opponent", {}).get("logo"), "id": e.get("opponent", {}).get("id")},
             "date": e.get("gameDate", "")[:10],
@@ -235,7 +239,13 @@ def match_summary(m: dict) -> dict:
             if group.get("name") == "goals" and group.get("leaders"):
                 top = group["leaders"][0]
                 leaders[c["team"].get("displayName")] = {"player": top["athlete"]["displayName"], "goals": top["displayValue"]}
-    return {"form": form, "h2h": h2h, "leaders": leaders}
+    table = {}
+    for group in (s.get("standings") or {}).get("groups", []):
+        for entry in group.get("standings", {}).get("entries", []):
+            stats = {x.get("name"): x.get("displayValue") for x in entry.get("stats", [])}
+            table[entry.get("team")] = {"puesto": stats.get("rank"), "puntos": stats.get("points"),
+                                        "jugados": stats.get("gamesPlayed")}
+    return {"form": form, "h2h": h2h, "leaders": leaders, "table": table}
 
 
 def h2h_tally(h2h: dict | None, home: str, away: str) -> tuple[int, int, int]:

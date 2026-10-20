@@ -22,6 +22,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import brand as B
+import datos
 import horarios
 import photos
 import reels
@@ -175,9 +176,12 @@ def preview_caption(m: dict, summary: dict) -> str:
             wins = sum(g["result"] == "G" for g in games)
             facts.append(f"{team['name']}: {wins} victorias en sus últimos {len(games)}")
     hw, dr, aw = sources.h2h_tally(summary.get("h2h"), h["full_name"], a["full_name"])
-    if hw + dr + aw:
+    if hw + dr + aw >= 2:
         facts.append(f"Últimos {hw + dr + aw} cruces: {h['name']} {hw}, {a['name']} {aw} y {dr} empate{'s' if dr != 1 else ''}")
     lines.append("\n".join(f"• {f}" for f in facts))
+    top = datos.facts(m, summary)
+    if top:
+        lines.append(f"🤓 El dato: {top[0]['numero']} {top[0]['texto']}. Desliza para ver más 👉")
     lines.append(f"¿Cómo termina? Deja tu marcador 👇\nMándaselo a ese amigo que es del {a['name']} o del {h['name']}.")
     return build_caption("\n\n".join(l for l in lines if l), [h["full_name"], a["full_name"], m["competition"]], "ESPN")
 
