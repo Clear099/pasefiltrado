@@ -101,7 +101,8 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           PUBLIC_BASE_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}
-        run: python publish.py
+        # videos por jsDelivr, fijados al commit que acaba de subir las imágenes
+        run: VIDEO_BASE_URL="https://cdn.jsdelivr.net/gh/${{ github.repository }}@$(git rev-parse HEAD)" python publish.py
 
       # una vez por hora (lo controla comments.py): responder y moderar comentarios
       - name: Comentarios

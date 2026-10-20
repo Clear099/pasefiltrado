@@ -104,6 +104,8 @@ def main() -> None:
         return check()
 
     base = os.environ["PUBLIC_BASE_URL"].rstrip("/")
+    # GitHub sirve los .mp4 como application/octet-stream; jsDelivr los sirve como video/mp4
+    video_base = os.environ.get("VIDEO_BASE_URL", base).rstrip("/")
     # una noticia de hace horas ya no es noticia: lo que quedó atrasado en la cola se descarta
     limit = dt.datetime.now(TZ) - dt.timedelta(hours=CFG.get("pending_max_hours", 6))
     pending = []
@@ -138,7 +140,7 @@ def main() -> None:
         if entry.get("reel"):
             try:
                 feed = "true" if CFG.get("reels", {}).get("en_feed", False) else "false"
-                reel = ig("POST", f"{user_id()}/media", media_type="REELS", video_url=f"{base}/{entry['reel']}",
+                reel = ig("POST", f"{user_id()}/media", media_type="REELS", video_url=f"{video_base}/{entry['reel']}",
                           caption=entry["caption"], share_to_feed=feed)["id"]
                 wait_ready(reel, entry["reel"], tries=60)  # los videos tardan más en procesarse
                 ig("POST", f"{user_id()}/media_publish", creation_id=reel)
