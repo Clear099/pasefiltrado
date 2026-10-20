@@ -264,8 +264,9 @@ def marquee(matches: list[dict], big_teams: list[str], leagues: dict[str, str]) 
     return best if best_score >= 20 else None
 
 
-STAT_KEYS = {"possessionPct": "Posesión", "totalShots": "Remates", "shotsOnTarget": "Al arco", "wonCorners": "Córners",
-             "saves": "Atajadas"}
+STAT_KEYS = {"possessionPct": "Posesión", "totalShots": "Remates", "shotsOnTarget": "Remates al arco",
+             "wonCorners": "Córners", "offsides": "Fueras de juego", "yellowCards": "Tarjetas amarillas",
+             "redCards": "Tarjetas rojas", "foulsCommitted": "Faltas", "saves": "Atajadas"}
 
 
 def match_stats(m: dict) -> dict:

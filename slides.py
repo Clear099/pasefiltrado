@@ -464,6 +464,10 @@ def intro_carousel(out_dir: Path) -> list[Path]:
 
 # ---------------------------------------------------------------- resultado: así fue
 
+STAT_ROWS = ["Posesión", "Remates", "Remates al arco", "Córners", "Fueras de juego", "Tarjetas amarillas",
+             "Tarjetas rojas"]
+CARD_COLORS = {"Tarjetas amarillas": (245, 200, 20), "Tarjetas rojas": (225, 30, 40)}
+
 def result_timeline(m: dict, st: dict, stats: dict, out: Path, i: int = 2, n: int = 2) -> Path:
     """Segundo slide del resultado: cada gol con su minuto y el marcador parcial, y las estadísticas."""
     img, d = R.base(right=f"{i}/{n}")
@@ -487,7 +491,7 @@ def result_timeline(m: dict, st: dict, stats: dict, out: Path, i: int = 2, n: in
     timeline = st["linea"][:9]
     y = 390
     # espacio hasta el pie (H - 130), descontando el bloque de estadísticas (título + 4 filas)
-    stats_h = (40 + 50 + 4 * 76) if stats else 0
+    stats_h = (30 + 44 + len(STAT_ROWS) * 58) if stats else 0
     row = min(70, (H - 130 - stats_h - y) / max(len(timeline), 1))
     d.line([s(W / 2), s(y), s(W / 2), s(y + row * len(timeline))], fill=B.LINEA, width=s(3))
     fm, fp, fsc = font("score", 30), font("strong", int(min(30, row * 0.45))), font("score", 30)
@@ -516,28 +520,37 @@ def result_timeline(m: dict, st: dict, stats: dict, out: Path, i: int = 2, n: in
             d.text((s(W / 2 + bw / 2 + 24), s(cy) - (pt + pb) / 2), txt, font=fp, fill=B.TEXTO)
         y += row
 
-    # estadísticas en barras enfrentadas
+    # estadísticas al estilo Google: valor local | dato | valor visita, con barra comparativa
     if stats:
-        y += 40
+        y += 30
         tracked(d, (s(W / 2) - R.tracked_len("ESTADÍSTICAS", font("label", 22), 4) / 2, s(y)), "ESTADÍSTICAS",
                 font("label", 22), B.ACENTO, 4)
-        y += 50
-        fv, fl = font("score", 34), font("label", 20)
-        for label in ("Posesión", "Remates", "Al arco", "Córners"):
-            hv, av = stats["home"].get(label), stats["away"].get(label)
-            if hv is None or av is None:
-                continue
+        y += 44
+        fv, fl = font("score", 30), font("label", 19)
+        rows = [k for k in STAT_ROWS if k in stats["home"] and k in stats["away"]]
+        step = min(64, (H - 130 - y) / max(len(rows), 1))
+        for label in rows:
+            hv, av = stats["home"][label], stats["away"][label]
             fmt = (lambda v: f"{v:.0f}%") if label == "Posesión" else (lambda v: f"{v:.0f}")
-            total = (hv + av) or 1
-            bar_w = W - 124 - 2 * 110
-            x0 = 62 + 110
-            d.rectangle([s(x0), s(y + 34), s(x0 + bar_w), s(y + 46)], fill=B.GRAFITO)
-            split = x0 + bar_w * hv / total
-            d.rectangle([s(x0), s(y + 34), s(split), s(y + 46)], fill=B.ACENTO if hv >= av else B.SECUNDARIO)
-            d.rectangle([s(split + 4), s(y + 34), s(x0 + bar_w), s(y + 46)], fill=B.ACENTO if av > hv else B.SECUNDARIO)
+            # tarjetas: un rectangulito del color de la tarjeta junto al nombre
             tracked(d, (s(W / 2) - R.tracked_len(label.upper(), fl, 3) / 2, s(y)), label.upper(), fl, B.SECUNDARIO, 3)
-            paint(d, (s(62), s(y + 20)), fmt(hv), fv, B.TEXTO)
-            paint(d, (s(W - 62) - fv.getlength(fmt(av)), s(y + 20)), fmt(av), fv, B.TEXTO)
-            y += 76
+            if label in CARD_COLORS:
+                cx = W / 2 - R.tracked_len(label.upper(), fl, 3) / R.S / 2 - 22
+                d.rectangle([s(cx), s(y + 1), s(cx + 12), s(y + 18)], fill=CARD_COLORS[label])
+            paint(d, (s(62), s(y + step * 0.30)), fmt(hv), fv, B.TEXTO if hv >= av else B.SECUNDARIO)
+            paint(d, (s(W - 62) - fv.getlength(fmt(av)), s(y + step * 0.30)), fmt(av), fv,
+                  B.TEXTO if av >= hv else B.SECUNDARIO)
+            bar_w, x0, by = W - 124 - 2 * 100, 62 + 100, y + step * 0.48
+            top_v = max(hv, av) or 1
+            half = bar_w / 2
+            d.rectangle([s(x0), s(by), s(x0 + bar_w), s(by + 9)], fill=B.GRAFITO)
+            # cada barra crece desde el centro hacia su equipo, como en Google; el mayor llena su mitad
+            if hv:
+                d.rectangle([s(x0 + half - 3 - (half - 3) * hv / top_v), s(by), s(x0 + half - 3), s(by + 9)],
+                            fill=B.ACENTO if hv > av else B.SECUNDARIO)
+            if av:
+                d.rectangle([s(x0 + half + 3), s(by), s(x0 + half + 3 + (half - 3) * av / top_v), s(by + 9)],
+                            fill=B.ACENTO if av > hv else B.SECUNDARIO)
+            y += step
     R.footer(d, "ESPN")
     return R.finish(img, out)
