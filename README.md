@@ -36,12 +36,14 @@ Cuenta de Instagram automatizada de noticias de fútbol. Cada día genera y publ
 
 **Alternativas** (cambiando `"theme"` en `config.json`): `transmision` (negro y dorado, Oswald) y `editorial` (negro y dorado, Playfair Display).
 
-**Bio sugerida** (150 caracteres)
+**Perfil de Instagram**
+- Nombre: `Pase Filtrado | Noticias de Fútbol` (el nombre también entra en el buscador).
+- Categoría: *Sitio web de noticias y medios*.
+- Bio (122 de 150 caracteres):
 ```
-⚽ Noticias de fútbol, sin relleno
-🗞️ Fichajes · Resultados · Datos
-🌎 Latinoamérica y España
-⏰ Agenda 9:00 · Resultados 23:50
+⚽ Champions, ligas top de Europa y Libertadores
+🔥 Previas, resultados al instante y fichajes
+🌎 Para Latinoamérica y España
 ```
 
 **Recursos listos:** `assets/brand/perfil.jpg` (foto de perfil) y `assets/brand/destacada-*.jpg` (portadas de historias destacadas).
