@@ -17,6 +17,10 @@ on:
         type: choice
         options: [verificar, manana, noticias, monitor, resultados, presentacion]
         default: monitor
+      partido:
+        description: "Opcional, con manana: previa de este partido (ej. Boca)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -82,7 +86,12 @@ jobs:
         if: steps.check.outputs.run == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python run.py --slot ${{ steps.slot.outputs.slot }}
+        run: |
+          if [ -n "${{ inputs.partido }}" ]; then
+            python run.py --slot ${{ steps.slot.outputs.slot }} --partido "${{ inputs.partido }}"
+          else
+            python run.py --slot ${{ steps.slot.outputs.slot }}
+          fi
 
       # Instagram descarga la imagen desde una URL pública: primero se sube al repo
       - name: Subir imágenes

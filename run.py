@@ -186,9 +186,18 @@ def preview_caption(m: dict, summary: dict) -> str:
     return build_caption("\n\n".join(l for l in lines if l), [h["full_name"], a["full_name"], m["competition"]], "ESPN")
 
 
-def slot_morning(out_dir: Path, today: dt.date) -> list[dict]:
+def slot_morning(out_dir: Path, today: dt.date, partido: str | None = None) -> list[dict]:
+    """Previa del partido del día; con `partido` (ej. "Boca"), la previa de ese partido."""
     matches = [m for m in matches_for(today) if m["state"] == "pre"]
-    mq = todays_marquee(matches)
+    if partido:
+        wanted = [m for m in sources.fetch_matches(CFG["leagues"], today, CFG["timezone"])
+                  if m["state"] == "pre" and partido.lower() in duel(m).lower()]
+        if not wanted:
+            print(f"[previa] no hay un partido por jugarse hoy que coincida con {partido!r}")
+            return []
+        mq = wanted[0]
+    else:
+        mq = todays_marquee(matches)
     if mq:
         key = f"preview:{mq['id']}"
         if key in done_keys():
@@ -379,6 +388,7 @@ def main() -> None:
     ap.add_argument("--slot", required=True,
                     choices=["manana", "agenda", "noticias", "monitor", "resultados", "presentacion", "demo"])
     ap.add_argument("--date", help="AAAA-MM-DD, por defecto hoy (hora local)")
+    ap.add_argument("--partido", help="con --slot manana: previa del partido que contenga este texto (ej. Boca)")
     args = ap.parse_args()
 
     today = dt.date.fromisoformat(args.date) if args.date else dt.datetime.now(TZ).date()
@@ -386,7 +396,7 @@ def main() -> None:
 
     render.set_background(stadium())
     if args.slot in ("manana", "agenda"):
-        entries = slot_morning(out_dir, today)
+        entries = slot_morning(out_dir, today, args.partido)
     elif args.slot == "noticias":
         mq = todays_marquee(matches_for(today))
         entries = slot_news(out_dir, CFG["news_per_run"], focus=duel(mq) if mq else None)
