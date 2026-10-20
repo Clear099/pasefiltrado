@@ -21,6 +21,7 @@ import unicodedata
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import brand as B
 import horarios
 import photos
 import render
@@ -67,7 +68,7 @@ def build_caption(body: str, hashtags: list[str], source: str | None = None, bg_
         parts.append(f"📰 Fuente: {source}")
     if bg_credit and render.BACKGROUND:
         parts.append(f"📷 Fondo: {render.BACKGROUND['credit'].removeprefix('Foto: ')}")
-    parts.append("⚽ @pasefiltrado · fútbol sin relleno")
+    parts.append(f"⚽ {B.HANDLE} · fútbol sin relleno")
     parts.append(" ".join(tags[:8]))
     return "\n\n".join(parts)[:2200]
 

@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 NAME = "PASE FILTRADO"
-HANDLE = "@pasefiltrado"
+HANDLE = "@pasofiltradonews"
 TAGLINE = "Filtramos el ruido. Te pasamos el fútbol."
 
 ROOT = Path(__file__).parent
