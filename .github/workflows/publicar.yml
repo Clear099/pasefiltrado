@@ -15,7 +15,7 @@ on:
       slot:
         description: "Horario a ejecutar"
         type: choice
-        options: [verificar, manana, noticias, monitor, resultados]
+        options: [verificar, manana, noticias, monitor, resultados, presentacion]
         default: monitor
 
 permissions:

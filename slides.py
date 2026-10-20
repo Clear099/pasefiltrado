@@ -311,3 +311,152 @@ def results_carousel(featured: dict, matches: list[dict], out_dir: Path, date: d
                  "home_team": m["home"], "away_team": m["away"]} for m in by_comp[comp][:9]]
         paths.append(R.render_list(comp, "Resultados", rows, out_dir / f"fecha-{k}.jpg", kind="results"))
     return paths
+
+
+# ---------------------------------------------------------------- presentación de la cuenta (post fijado)
+
+def _rows(d, items: list[tuple[str, str]], y: float, row_h: float = 178, numbered: bool = True) -> float:
+    """Filas grandes: número, título y una línea de detalle."""
+    for k, (head, sub) in enumerate(items, start=1):
+        d.rectangle([s(62), s(y), s(W - 62), s(y + row_h - 16)], fill=B.GRAFITO)
+        d.rectangle([s(62), s(y), s(68), s(y + row_h - 16)], fill=B.ACENTO)
+        x = 92
+        if numbered:
+            fn = font("score", 84)
+            num = f"{k:02d}"
+            _, top, _, bottom = fn.getbbox(num)
+            paint(d, (s(x), s(y + (row_h - 16) / 2) - (top + bottom) / 2), num, fn, B.ACENTO)
+            x += R.text_w(num, fn) + 28
+        fh, lines, hs = R.fit_text(case(head), "display", int(W - 62 - 28 - x), 1, 58, 34)
+        paint(d, (s(x), s(y + 22)), lines[0], fh, B.TEXTO)
+        fs, slines, ss = R.fit_text(sub, "body", int(W - 62 - 28 - x), 2, 28, 22)
+        sy = y + 30 + hs * 1.12
+        for line in slines:
+            d.text((s(x), s(sy)), line, font=fs, fill=B.SECUNDARIO)
+            sy += ss * 1.25
+        y += row_h
+    return y
+
+
+def intro_cover(out: Path, n: int) -> Path:
+    import logos
+    img, d = R.base(right=f"1/{n}")
+    logo = logos._insignia(s(560))
+    d.canvas.paste(logo, (s(W / 2) - logo.width // 2, s(200)), logo)
+    chip_text = "BIENVENIDO"
+    fl = font("label", 26)
+    cw = R.tracked_len(chip_text, fl, 2) / R.S + 40 + 46 * R.SLANT
+    chip(d, W / 2 - cw / 2, 790, chip_text, filled=True)
+    lines = [case("Filtramos el ruido."), case("Te pasamos el fútbol.")]
+    size = 84
+    f = font("display", size)
+    y = 868
+    for line in lines:
+        R.draw_rich_lines(d, [line], f, W / 2 - R.text_w(line, f) / 2, y, size, B.TEXTO, ["fútbol."])
+        y += size * B.THEME["leading"]
+    _swipe(d)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_coverage(out: Path, i: int, n: int) -> Path:
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "COBERTURA")
+    y = _title(d, "Lo que cubrimos", ["cubrimos"]) + 30
+    _rows(d, [
+        ("Champions League", "Cada jornada, de la fase de liga a la final"),
+        ("Las 5 grandes de Europa", "LaLiga · Premier League · Serie A · Bundesliga · Ligue 1"),
+        ("Copa Libertadores", "La gloria eterna, partido a partido"),
+        ("Lo grande de Sudamérica", "Clásicos, Eliminatorias, Copa América y los grandes de cada liga"),
+    ], y)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_formats(out: Path, i: int, n: int) -> Path:
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "LO QUE VAS A VER")
+    y = _title(d, "Así trabajamos", ["trabajamos"]) + 30
+    _rows(d, [
+        ("Partido del día", "Previa con forma, historial, goleadores y tu pronóstico"),
+        ("Resultado al instante", "Minutos después del pitazo final, con los goles"),
+        ("La fecha en 1 minuto", "Todos los resultados de la jornada en un carrusel"),
+        ("Noticias filtradas", "Solo lo importante, siempre con su fuente"),
+    ], y)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_traffic_light(out: Path, i: int, n: int) -> Path:
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "FICHAJES")
+    y = _title(d, "El semáforo de fichajes", ["fichajes"]) + 40
+    items = [
+        ("CONFIRMADO", "Firmado y anunciado. Si lo ves, es oficial."),
+        ("AVANZADO", "Acuerdo cerca, faltan los últimos detalles."),
+        ("RUMOR", "Hay interés o sondeos. Todavía nada cerrado."),
+    ]
+    for status, text in items:
+        d.rectangle([s(62), s(y), s(W - 62), s(y + 190)], fill=B.GRAFITO)
+        R.status_badge(d, status, W - 92, y + 62)
+        fs, lines, size = R.fit_text(text, "strong", 560, 2, 34, 26)
+        ty = y + 40
+        for line in lines:
+            d.text((s(92), s(ty)), line, font=fs, fill=B.TEXTO)
+            ty += size * 1.3
+        y += 214
+    fl = font("label", 22)
+    _centered(d, "NUNCA MARCAMOS COMO CONFIRMADO LO QUE NO LO ESTÁ", fl, y + 18, B.SECUNDARIO, 2)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_times(out: Path, i: int, n: int) -> Path:
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "HORARIOS")
+    y = _title(d, "Tu hora, tu bandera", ["bandera"]) + 40
+    fs, lines, size = R.fit_text("Cada partido con la hora de tu país, de México a España.", "body", W - 124, 2, 36, 28)
+    for line in lines:
+        d.text((s(62), s(y)), line, font=fs, fill=B.TEXTO)
+        y += size * 1.35
+    y += 50
+    d.rectangle([s(62), s(y), s(W - 62), s(y + 250)], fill=B.GRAFITO)
+    fl = font("label", 22)
+    _centered(d, "EJEMPLO · NOCHE DE CHAMPIONS EN EUROPA", fl, y + 24, B.SECUNDARIO, 3)
+    time_grid(d, dt.datetime(2026, 10, 20, 19, 0, tzinfo=dt.timezone.utc), y + 58)
+    y += 330
+    codes = list(horarios.PAISES)
+    R.flag_row(d, codes[:6], W / 2, y + 40, 74, 18)
+    R.flag_row(d, codes[6:], W / 2, y + 132, 74, 18)
+    fl = font("label", 26)
+    _centered(d, f"{len(codes)} PAÍSES, UNA SOLA CUENTA", fl, y + 200, B.TEXTO, 4)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_follow(out: Path, i: int, n: int) -> Path:
+    import logos
+    img, d = R.base(right=f"{i}/{n}")
+    logo = logos._insignia(s(380))
+    d.canvas.paste(logo, (s(W / 2) - logo.width // 2, s(190)), logo)
+    f, lines, size = R.fit_text(case("Síguenos y activa las notificaciones"), "display", W - 124, 2, 90, 56)
+    y = 620
+    for line in lines:
+        R.draw_rich_lines(d, [line], f, W / 2 - R.text_w(line, f) / 2, y, size, B.TEXTO, ["notificaciones"])
+        y += size * B.THEME["leading"]
+    fh = font("display", 64)
+    paint(d, (s(W / 2) - R.klen(B.HANDLE, fh) / 2, s(y + 30)), B.HANDLE, fh, B.ACENTO)
+    fl = font("label", 24)
+    _centered(d, "COMPÁRTELO CON TU GRUPO DEL FÚTBOL", fl, y + 150, B.SECUNDARIO, 3)
+    R.footer(d, None)
+    return R.finish(img, out)
+
+
+def intro_carousel(out_dir: Path) -> list[Path]:
+    """Carrusel de presentación de la cuenta, para fijar en el perfil."""
+    builders = [intro_coverage, intro_formats, intro_traffic_light, intro_times, intro_follow]
+    n = len(builders) + 1
+    paths = [intro_cover(out_dir / "presentacion-1.jpg", n)]
+    for i, b in enumerate(builders, start=2):
+        paths.append(b(out_dir / f"presentacion-{i}.jpg", i, n))
+    return paths

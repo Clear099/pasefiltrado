@@ -335,9 +335,28 @@ def slot_results(out_dir: Path, today: dt.date) -> list[dict]:
              "caption": build_caption(body, ["resultados"] + list(dict.fromkeys(m["competition"] for m in matches))[:3])}]
 
 
+def slot_intro(out_dir: Path) -> list[dict]:
+    """Carrusel de presentación de la cuenta (se publica una sola vez, para fijarlo en el perfil)."""
+    if "intro" in {h["key"] for h in load("history.json", [])} | done_keys():
+        print("[presentación] ya publicada")
+        return []
+    paths = slides.intro_carousel(out_dir)
+    body = ("👋 Bienvenido a Pase Filtrado\n"
+            "Filtramos el ruido. Te pasamos el fútbol ⚽\n\n"
+            "🏆 Champions League, las 5 grandes de Europa y la Copa Libertadores\n"
+            "🔥 El partido del día con previa, datos y tu pronóstico\n"
+            "⚡ Resultados al instante, minutos después del pitazo\n"
+            "✅ Fichajes con semáforo: confirmado, en negociación o rumor\n"
+            "🌎 Cada partido con la hora de tu país, de México a España\n\n"
+            "Activa las notificaciones 🔔 y mándaselo a tu grupo del fútbol 👇")
+    return [{"key": "intro", "title": "Presentación de la cuenta", "images": [rel(p) for p in paths],
+             "caption": build_caption(body, ["ChampionsLeague", "CopaLibertadores", "LaLiga", "PremierLeague"])}]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--slot", required=True, choices=["manana", "agenda", "noticias", "monitor", "resultados", "demo"])
+    ap.add_argument("--slot", required=True,
+                    choices=["manana", "agenda", "noticias", "monitor", "resultados", "presentacion", "demo"])
     ap.add_argument("--date", help="AAAA-MM-DD, por defecto hoy (hora local)")
     args = ap.parse_args()
 
@@ -354,6 +373,8 @@ def main() -> None:
         entries = slot_monitor(out_dir, today)
     elif args.slot == "resultados":
         entries = slot_results(out_dir, today)
+    elif args.slot == "presentacion":
+        entries = slot_intro(ROOT / "posts" / "presentacion")
     else:
         entries = slot_morning(out_dir, today) + slot_news(out_dir, 2, allow_basic=True) \
             + slot_results(out_dir, today - dt.timedelta(days=2))
