@@ -4,12 +4,7 @@ Sin ANTHROPIC_API_KEY funciona en modo básico: usa el titular original de la fu
 """
 from __future__ import annotations
 
-import json
-import os
-
-import anthropic
-
-MODEL = os.environ.get("PF_MODEL", "claude-opus-5-5")
+import ia
 
 CATEGORIES = ["ÚLTIMA HORA", "FICHAJES", "NOTICIA", "DATO", "SELECCIÓN", "POLÉMICA"]
 
@@ -78,7 +73,7 @@ POST_SCHEMA = {
 
 
 def has_ai() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY"))
+    return ia.available()
 
 
 def pick_and_write(candidates: list[dict], recent_titles: list[str], n: int,
@@ -119,21 +114,12 @@ Ya publicados recientemente:
 Noticias candidatas:
 {listing}"""
 
-    client = anthropic.Anthropic()
-    response = client.beta.messages.create(
-        model=MODEL,
-        max_tokens=16000,
-        system=SYSTEM,
-        messages=[{"role": "user", "content": prompt}],
-        output_config={"effort": "medium", "format": {"type": "json_schema", "schema": POST_SCHEMA}},
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
-    )
-    if response.stop_reason == "refusal":
-        print("[redactor] Claude rechazó la solicitud, uso modo básico")
-        return _basic(candidates, n)
-    text = next(b.text for b in response.content if b.type == "text")
-    posts = json.loads(text)["posts"][:n]
+    # la revisión de cada hora es barata (esfuerzo bajo) y es lo primero que se corta si falta presupuesto
+    result = ia.ask_json("ultima_hora" if only_important else "noticias", SYSTEM, prompt, POST_SCHEMA,
+                         effort="low" if only_important else "medium")
+    if result is None:
+        return []
+    posts = result["posts"][:n]
     for p in posts:
         src = candidates[p["candidate"]]
         p["source"] = src["source"]

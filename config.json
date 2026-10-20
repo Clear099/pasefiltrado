@@ -16,10 +16,23 @@
   },
   "fondo_generico": "football stadium night floodlights",
   "news_per_run": 1,
+  "horas_noticias": [
+    13,
+    18
+  ],
   "instant_min_interest": 14,
   "instant_max_per_day": 3,
   "max_posts_per_day": 8,
   "pending_max_hours": 6,
+  "presupuesto_mensual_usd": 30,
+  "comentarios": {
+    "dias": 7,
+    "max_por_ejecucion": 20,
+    "max_por_dia": 150
+  },
+  "revision": {
+    "auto_aplicar": true
+  },
   "max_news_age_hours": 18,
   "leagues": {
     "uefa.champions": "Champions League",

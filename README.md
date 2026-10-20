@@ -96,6 +96,14 @@ API de ESPN (partidos, goles, colores) ─────────┼─► run.
 
 Ligas, feeds, hashtags y cantidad de noticias se cambian en `config.json`.
 
+## 4b. Piloto automático
+
+- **Comentarios (cada hora, `comments.py`).** Claude lee los comentarios nuevos de los posts de los últimos 7 días y decide: responder con la voz de la marca, ocultar (insultos, odio, spam, apuestas) o ignorar. Topes: 20 respuestas por hora, 150 por día y 2 por persona. Todo queda en `data/comentarios.json`. Requiere el permiso `instagram_business_manage_comments`.
+- **Estadísticas (cada noche, `metrics.py`).** Alcance, vistas, guardados, envíos, seguidores ganados y visitas al perfil de cada post, más los seguidores diarios, en `data/metricas.json`. Requiere `instagram_business_manage_insights`.
+- **Revisión semanal (lunes 10:00, `revision.py`).** Claude analiza la semana por tipo de post y por hora, ajusta `config.json` solo dentro de rangos seguros (cantidad de noticias, horas de noticias, umbrales de resultados y tope diario), guarda el reporte en `reportes/` y abre un *issue* en GitHub para avisar. Con `"revision": {"auto_aplicar": false}` solo propone.
+- **Presupuesto (`ia.py`).** Cada llamada a Claude anota su costo en `data/gasto.json`. Con `presupuesto_mensual_usd` (30 por defecto), la revisión de última hora se detiene al 70 % del tope, los comentarios al 90 % y las noticias y la revisión semanal al 100 %.
+- **Lo que no se automatiza:** seguir cuentas, dar likes o mandar mensajes en frío. La API no lo permite y hacerlo con bots viola las condiciones de Instagram.
+
 ## 5. Puesta en marcha
 
 ### Paso 1 · Cuenta de Instagram

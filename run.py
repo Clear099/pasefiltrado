@@ -282,6 +282,22 @@ def result_post(m: dict, out_dir: Path) -> dict:
             "image": rel(path), "caption": caption}
 
 
+def due(task: str, minutes: int) -> bool:
+    """True si pasaron `minutes` desde la última vez que corrió `task` (y la marca como hecha).
+
+    El monitor corre cada 15 minutos, pero GitHub a veces se atrasa: con esto las tareas
+    horarias no se saltan ni se repiten aunque el horario se corra.
+    """
+    state = load("estado.json", {})
+    now = dt.datetime.now(TZ)
+    last = state.get(task)
+    if last and now - dt.datetime.fromisoformat(last) < dt.timedelta(minutes=minutes):
+        return False
+    state[task] = now.isoformat()
+    save("estado.json", state)
+    return True
+
+
 def posts_today() -> int:
     today = dt.datetime.now(TZ).date().isoformat()
     return sum(1 for h in load("history.json", []) if h["date"].startswith(today)) + len(load("pending.json", []))
@@ -303,10 +319,15 @@ def slot_monitor(out_dir: Path, today: dt.date) -> list[dict]:
         entries.append(result_post(m, out_dir))
         instant_today += 1
 
-    # una vez por hora, revisar si hay algo de última hora (entre 9:00 y 23:00)
     now = dt.datetime.now(TZ)
-    if now.minute < 15 and 9 <= now.hour <= 23 and posts_today() + len(entries) < CFG["max_posts_per_day"]:
-        entries += slot_news(out_dir, 1, focus=duel(mq) if mq else None, only_important=True)
+    room = posts_today() + len(entries) < CFG["max_posts_per_day"]
+    focus = duel(mq) if mq else None
+    # noticias a las horas de config.json (la revisión semanal puede moverlas)
+    if now.hour in CFG.get("horas_noticias", []) and room and due(f"noticias-{now.hour}", 23 * 60):
+        entries += slot_news(out_dir, CFG["news_per_run"], focus=focus)
+    # una vez por hora, entre 9:00 y 23:00, revisar si hay algo de última hora
+    elif 9 <= now.hour <= 23 and room and due("ultima_hora", 55):
+        entries += slot_news(out_dir, 1, focus=focus, only_important=True)
     return entries
 
 

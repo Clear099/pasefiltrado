@@ -5,10 +5,9 @@ name: Publicar
 on:
   schedule:
     - cron: "0 12 * * *"         # 09:00 Chile · previa del partido del día (o agenda)
-    - cron: "0 16 * * *"         # 13:00 Chile · noticia
-    - cron: "0 21 * * *"         # 18:00 Chile · noticia
     - cron: "30 2 * * *"         # 23:30 Chile · carrusel "La fecha en 1 minuto"
-    - cron: "*/15 12-23 * * *"   # 09:00–20:59 Chile · monitor: resultado al instante y última hora
+    - cron: "*/15 12-23 * * *"   # 09:00–20:59 Chile · monitor: resultados al instante, noticias
+                                 # (a las horas de config.json), última hora y comentarios
     - cron: "*/15 0-3 * * *"     # 21:00–00:59 Chile · monitor
   workflow_dispatch:
     inputs:
@@ -71,7 +70,6 @@ jobs:
         run: |
           case "${{ github.event.schedule }}" in
             "0 12 * * *") SLOT=manana ;;
-            "0 16 * * *"|"0 21 * * *") SLOT=noticias ;;
             "30 2 * * *") SLOT=resultados ;;
             "") SLOT="${{ inputs.slot }}" ;;
             *) SLOT=monitor ;;
@@ -102,6 +100,25 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           PUBLIC_BASE_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}
         run: python publish.py
+
+      # una vez por hora (lo controla comments.py): responder y moderar comentarios
+      - name: Comentarios
+        if: steps.check.outputs.run == 'true' && env.HAS_IG == 'true' && steps.slot.outputs.slot == 'monitor'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python comments.py
+
+      # al cierre del día: estadísticas de la cuenta y de cada post
+      - name: Métricas
+        if: steps.check.outputs.run == 'true' && env.HAS_IG == 'true' && steps.slot.outputs.slot == 'resultados'
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python metrics.py
 
       - name: Guardar historial
         if: steps.check.outputs.run == 'true'
