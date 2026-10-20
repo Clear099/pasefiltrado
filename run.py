@@ -24,6 +24,7 @@ from zoneinfo import ZoneInfo
 import brand as B
 import horarios
 import photos
+import reels
 import relato
 import render
 import slides
@@ -264,6 +265,11 @@ def result_post(m: dict, out_dir: Path) -> dict:
     if cover_photo:
         caption += f"\n\n📷 {cover_photo['credit']}"
     entry = {"key": f"match:{m['id']}", "title": f"{h['full_name']} vs {a['full_name']}", "caption": caption}
+    if CFG.get("reels", {}).get("activo", True):
+        try:
+            entry["reel"] = rel(reels.render_reel(m, st, head, out_dir / f"{base}.mp4"))
+        except (RuntimeError, OSError) as e:
+            print(f"[reel] no se pudo generar: {e}")  # el carrusel sale igual
     if len(paths) > 1:
         entry["images"] = [rel(x) for x in paths]
     else:

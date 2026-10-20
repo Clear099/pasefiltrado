@@ -150,5 +150,10 @@
     "uru.1": 2,
     "chi.1": 2,
     "col.1": 2
-  }
+  },
+  "reels": {
+    "activo": true,
+    "en_feed": false
+  },
+  "historias": true
 }

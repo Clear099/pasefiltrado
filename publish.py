@@ -54,9 +54,9 @@ def check() -> None:
         sys.exit("La cuenta no es profesional: cámbiala a Creador o Empresa en Instagram para poder publicar.")
 
 
-def wait_ready(container: str, what: str) -> None:
-    """Instagram descarga y procesa la imagen; hay que esperar a que quede FINISHED."""
-    for _ in range(30):
+def wait_ready(container: str, what: str, tries: int = 30) -> None:
+    """Instagram descarga y procesa la imagen (o el video); hay que esperar a que quede FINISHED."""
+    for _ in range(tries):
         status = ig("GET", container, fields="status_code").get("status_code")
         if status == "FINISHED":
             return
@@ -135,6 +135,16 @@ def main() -> None:
                 print(f"[historia] {entry['key']}")
             except (RuntimeError, requests.RequestException) as e:
                 print(f"[historia] no se pudo publicar: {e}")  # la historia nunca bloquea el post
+        if entry.get("reel"):
+            try:
+                feed = "true" if CFG.get("reels", {}).get("en_feed", False) else "false"
+                reel = ig("POST", f"{user_id()}/media", media_type="REELS", video_url=f"{base}/{entry['reel']}",
+                          caption=entry["caption"], share_to_feed=feed)["id"]
+                wait_ready(reel, entry["reel"], tries=60)  # los videos tardan más en procesarse
+                ig("POST", f"{user_id()}/media_publish", creation_id=reel)
+                print(f"[reel] {entry['key']}")
+            except (RuntimeError, requests.RequestException) as e:
+                print(f"[reel] no se pudo publicar: {e}")
         history.append({"key": entry["key"], "title": entry["title"], "image": entry.get("image") or entry["images"][0],
                         "media_id": media_id, "date": dt.datetime.now(TZ).isoformat()})
         if i + 1 < min(len(pending), args.max):

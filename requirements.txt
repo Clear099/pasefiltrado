@@ -4,3 +4,4 @@ feedparser>=6
 anthropic>=1.15
 tzdata
 fonttools>=4.50
+imageio-ffmpeg>=0.5
