@@ -15,7 +15,7 @@ on:
       slot:
         description: "Horario a ejecutar"
         type: choice
-        options: [manana, noticias, monitor, resultados]
+        options: [verificar, manana, noticias, monitor, resultados]
         default: monitor
 
 permissions:
@@ -36,7 +36,9 @@ jobs:
       - name: Comprobar configuración
         id: check
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$HAS_IG" != "true" ]; then
+          if [ "${{ inputs.slot }}" = "verificar" ]; then
+            echo "run=check" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$HAS_IG" != "true" ]; then
             echo "Instagram aún no está configurado: no se genera nada."
             echo "run=false" >> "$GITHUB_OUTPUT"
           else
@@ -44,16 +46,24 @@ jobs:
           fi
 
       - uses: actions/checkout@v4
-        if: steps.check.outputs.run == 'true'
+        if: steps.check.outputs.run != 'false'
 
       - uses: actions/setup-python@v5
-        if: steps.check.outputs.run == 'true'
+        if: steps.check.outputs.run != 'false'
         with:
           python-version: "3.12"
           cache: pip
 
       - run: pip install -r requirements.txt
-        if: steps.check.outputs.run == 'true'
+        if: steps.check.outputs.run != 'false'
+
+      # Opción manual "verificar": comprueba el token y la cuenta sin generar ni publicar nada
+      - name: Verificar conexión con Instagram
+        if: steps.check.outputs.run == 'check'
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python publish.py --check
 
       - name: Elegir horario
         if: steps.check.outputs.run == 'true'

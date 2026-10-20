@@ -112,12 +112,15 @@ Ligas, feeds, hashtags y cantidad de noticias se cambian en `config.json`.
 3. En *Settings → Actions → General → Workflow permissions*, elige **Read and write permissions**. El bot guarda las imágenes y el historial en el repositorio.
 
 ### Paso 3 · App de Meta (para publicar por API)
-1. Entra a developers.facebook.com con tu cuenta de Facebook y regístrate como desarrollador si te lo pide.
-2. *Mis apps → Crear app*, elige el caso de uso **"Administrar mensajes y contenido en Instagram"**, ponle de nombre "Pase Filtrado Bot" y créala. No hace falta vincular un portfolio comercial.
-3. En el panel de la app ve a *Casos de uso → Instagram → Configuración de la API con inicio de sesión de Instagram*.
-4. En **"Generar tokens de acceso"** pulsa *Agregar cuenta*, inicia sesión con @pasefiltradonews y acepta los permisos `instagram_business_basic` e `instagram_business_content_publish`.
-5. Ahí aparecen dos datos: el **ID de la cuenta de Instagram** (un número) y el **token de acceso**, que dura 60 días. Cópialos.
-   La app puede quedar en modo *desarrollo*: para publicar en tu propia cuenta no necesitas revisión de Meta.
+Antes, @pasefiltradonews tiene que ser **profesional** (Creador o Empresa) y **pública**.
+
+1. Entra a developers.facebook.com con tu cuenta de Facebook. Si es la primera vez, acepta registrarte como desarrollador.
+2. **Create App** (arriba a la derecha) → en el caso de uso elige **Other** → **Next** → tipo de app **Business** → **Next**. Solo las apps de tipo Business pueden usar Instagram.
+3. Nombre: "Pase Filtrado Bot", tu correo de contacto → **Create app**. Meta te pedirá tu contraseña de Facebook para confirmar. No hace falta conectar un portfolio comercial.
+4. En el panel de la app busca el producto **Instagram** → **Set up**. Se agrega solo **API setup with Instagram login**.
+5. En la sección **"1. Generate access tokens"**, pulsa **Add account**, inicia sesión con @pasefiltradonews y acepta los permisos.
+6. Junto a la cuenta aparece el botón **Generate token**. Cópialo: es el `IG_ACCESS_TOKEN` (dura 60 días; el bot lo renueva solo si cargas `GH_PAT`).
+7. No hace falta *App Review* ni pasar la app a *Live*: para publicar en tu propia cuenta basta el acceso estándar.
 
 ### Paso 4 · Clave de Claude
 En console.anthropic.com, *API Keys → Create Key*. Carga algo de saldo en *Billing*: con la configuración actual el gasto ronda unos centavos de dólar al día.
@@ -128,14 +131,15 @@ En el repositorio, *Settings → Secrets and variables → Actions → New repos
 | Secreto | Valor |
 |---|---|
 | `ANTHROPIC_API_KEY` | La clave del paso 4 |
-| `IG_USER_ID` | El ID de la cuenta del paso 3 |
+| `IG_USER_ID` (opcional) | El ID de la cuenta. Si no lo cargas, el bot lo obtiene del token |
 | `IG_ACCESS_TOKEN` | El token del paso 3 |
 | `GH_PAT` (opcional, recomendado) | Un token *fine-grained* de GitHub (*Settings → Developer settings → Personal access tokens*) solo para este repositorio, con permiso **Secrets: Read and write**. Con él, el token de Instagram se renueva solo cada lunes; sin él, hay que renovarlo a mano antes de los 60 días |
 
 ### Paso 6 · Primera prueba
-1. *Actions → Publicar → Run workflow*, con el horario `manana`. Debería salir la previa del partido del día (o la agenda).
-2. Revisa el post en Instagram. Si algo falla, el registro de la ejecución muestra el error de Instagram.
-3. Desde ese momento corre solo según la parrilla de la sección 3.
+1. *Actions → Publicar → Run workflow* con la opción **`verificar`**: comprueba el token y la cuenta sin publicar nada. El registro debe decir "Conectado a @pasefiltradonews".
+2. Luego *Run workflow* con `manana`: debería salir la previa del partido del día (o la agenda).
+3. Revisa el post en Instagram. Si algo falla, el registro de la ejecución muestra el error de Instagram.
+4. Desde ese momento corre solo según la parrilla de la sección 3.
 
 ## 6. Comandos locales
 

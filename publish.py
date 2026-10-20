@@ -2,8 +2,8 @@
 
 Usa la API de Instagram con inicio de sesión de Instagram (no requiere página de Facebook).
 Variables de entorno:
-    IG_USER_ID        id de la cuenta de Instagram (profesional: creador o empresa)
     IG_ACCESS_TOKEN   token de larga duración (60 días, renovable con --refresh-token)
+    IG_USER_ID        opcional: id de la cuenta de Instagram; si falta, se obtiene del token
     PUBLIC_BASE_URL   URL pública donde quedan las imágenes del repo, por ejemplo
                       https://raw.githubusercontent.com/USUARIO/pasefiltrado/main
 """
@@ -32,6 +32,28 @@ def ig(method: str, path: str, **params) -> dict:
     return data
 
 
+_USER: dict = {}
+
+
+def account() -> dict:
+    """Cuenta dueña del token: {"user_id": ..., "username": ..., "account_type": ...}."""
+    if not _USER:
+        _USER.update(ig("GET", "me", fields="user_id,username,account_type"))
+    return _USER
+
+
+def user_id() -> str:
+    return os.environ.get("IG_USER_ID") or str(account()["user_id"])
+
+
+def check() -> None:
+    """Verifica el token sin publicar nada."""
+    acc = account()
+    print(f"Conectado a @{acc.get('username')} (id {acc.get('user_id')}, tipo {acc.get('account_type')})")
+    if acc.get("account_type") not in ("BUSINESS", "MEDIA_CREATOR"):
+        sys.exit("La cuenta no es profesional: cámbiala a Creador o Empresa en Instagram para poder publicar.")
+
+
 def wait_ready(container: str, what: str) -> None:
     """Instagram descarga y procesa la imagen; hay que esperar a que quede FINISHED."""
     for _ in range(30):
@@ -46,7 +68,7 @@ def wait_ready(container: str, what: str) -> None:
 
 def publish_entry(entry: dict, base: str) -> str:
     """Publica un post simple ("image") o un carrusel ("images", de 2 a 10)."""
-    user = os.environ["IG_USER_ID"]
+    user = user_id()
     if entry.get("images"):
         children = []
         for path in entry["images"][:10]:
@@ -73,10 +95,13 @@ def refresh_token() -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--refresh-token", action="store_true", help="renueva el token de larga duración")
+    ap.add_argument("--check", action="store_true", help="verifica el token y la cuenta sin publicar")
     ap.add_argument("--max", type=int, default=3, help="máximo de posts a publicar en esta ejecución")
     args = ap.parse_args()
     if args.refresh_token:
         return refresh_token()
+    if args.check:
+        return check()
 
     base = os.environ["PUBLIC_BASE_URL"].rstrip("/")
     # una noticia de hace horas ya no es noticia: lo que quedó atrasado en la cola se descarta
