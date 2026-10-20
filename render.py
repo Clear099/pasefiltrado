@@ -565,7 +565,7 @@ def render_result(match: dict, out: Path) -> Path:
     """Resultado: escudos en anillos dorados, marcador al centro y goleadores de cada lado."""
     W, H = B.POST_SIZE
     img, d = base(date=match.get("date"))
-    cw = chip(d, 62, 196, "RESULTADO FINAL" if match.get("final", True) else "EN VIVO")
+    cw = chip(d, 62, 196, (match.get("kicker") or "RESULTADO FINAL").upper())
     tracked(d, (s(62 + cw + 20), s(209)), match["competition"].upper(), font("label", 22), B.SECUNDARIO, 3)
 
     home, away = match["home"], match["away"]
@@ -824,6 +824,20 @@ def scoreboard(d, match: dict, y: float, h: float = 116):
             paint(d, (s(x1 - 22 - cs - 18) - fn.getlength(name), s(cy) - (nt + nb) / 2), name, fn, color)
 
 
+def kicker_block(d, x, y, text: str) -> float:
+    """Etiqueta de impacto grande (ej. "LOCURA EN ANFIELD"): bloque rojo inclinado con letras blancas."""
+    f, lines, size = fit_text(text.upper(), "display", 760, 1, 50, 30)
+    h = size * 1.32
+    w = text_w(lines[0], f) + 44 + h * SLANT
+    if T.get("slant"):
+        d.polygon(slanted(x, y, w, h), fill=B.ACENTO)
+    else:
+        d.rectangle([s(x), s(y), s(x + w), s(y + h)], fill=B.ACENTO)
+    _, top, _, bottom = f.getbbox(lines[0])
+    paint(d, (s(x + 22 + h * SLANT / 2), s(y + h / 2) - (top + bottom) / 2), lines[0], f, B.SOBRE_ACENTO)
+    return w
+
+
 def render_photo(post: dict, photo: dict, out: Path, match: dict | None = None, focus_y: float = 0.0) -> Path:
     """Portada con foto libre: marca arriba, marcador (opcional) y titular abajo, crédito en el pie."""
     W, H = B.POST_SIZE
@@ -843,9 +857,15 @@ def render_photo(post: dict, photo: dict, out: Path, match: dict | None = None, 
         y_chip = y_title - 74
     category = post.get("category", "NOTICIA").upper()
     breaking = category in ("ÚLTIMA HORA", "POLÉMICA")
-    cw = chip(d, 62, y_chip, category, filled=breaking, dot=B.ROJO if breaking else None, bg=B.NEGRO)
+    if post.get("kicker"):
+        y_chip -= 14
+        cw = kicker_block(d, 62, y_chip, post["kicker"])
+        ty = y_chip + 22
+    else:
+        cw = chip(d, 62, y_chip, category, filled=breaking, dot=B.ROJO if breaking else None, bg=B.NEGRO)
+        ty = y_chip + 13
     if post.get("competition"):
-        tracked(d, (s(62 + cw + 20), s(y_chip + 13)), post["competition"].upper(), font("label", 22), B.TEXTO, 3)
+        tracked(d, (s(62 + cw + 20), s(ty)), post["competition"].upper(), font("label", 22), B.TEXTO, 3)
     draw_rich_lines(d, lines, f, 62, y_title, size * T["leading"], B.TEXTO, post.get("highlight", []))
 
     # pie: crédito de la foto (lo exige la licencia) y usuario

@@ -24,6 +24,7 @@ from zoneinfo import ZoneInfo
 import brand as B
 import horarios
 import photos
+import relato
 import render
 import slides
 import sources
@@ -222,64 +223,52 @@ def slot_agenda(out_dir: Path, today: dt.date, matches: list[dict]) -> list[dict
 
 # ---------------------------------------------------------------- monitor: resultado al instante
 
-def clean_player(name: str) -> str:
-    """Quita las marcas de penal y autogol: 'Mbappé (p)' cuenta como 'Mbappé'."""
-    return re.sub(r"\s*\((p|e\.c\.)\)$", "", name)
-
-
-def surname(name: str) -> str:
-    parts = clean_player(name).split()
-    return parts[-1] if parts else name
-
-
-def result_headline(m: dict) -> tuple[str, list[str]]:
-    """Titular automático del resultado y palabras a destacar."""
-    h, a = m["home"], m["away"]
-    hs, as_ = int(h["score"]), int(a["score"])
-    if hs == as_:
-        return f"{h['name']} y {a['name']} empatan {hs}-{as_}", []
-    win, lose = (h, a) if hs > as_ else (a, h)
-    ws, ls = max(hs, as_), min(hs, as_)
-    own = [g for g in m["goals"] if g["team"] == win["full_name"] and "(e.c.)" not in g["player"]]
-    counts: dict[str, int] = {}
-    for g in own:
-        counts[clean_player(g["player"])] = counts.get(clean_player(g["player"]), 0) + 1
-    if counts:
-        star, k = max(counts.items(), key=lambda kv: kv[1])
-        if k >= 2:
-            label = {2: "Doblete", 3: "Hat-trick"}.get(k, f"{k} goles")
-            return f"{label} de {surname(star)} y el {win['name']} vence {ws}-{ls} al {lose['name']}", [surname(star)]
-    verb = "golea" if ws - ls >= 3 else "vence"
-    return f"El {win['name']} {verb} {ws}-{ls} al {lose['name']}", [win["name"]]
-
-
 def result_post(m: dict, out_dir: Path) -> dict:
-    """Post del resultado: portada con foto libre del goleador si hay, si no tarjeta con escudos."""
+    """Resultado al instante: portada con la historia del partido y slide "Así fue" (goles y estadísticas).
+
+    La foto es del protagonista con su club actual y reciente; si no hay una así, va el estadio del partido.
+    """
     h, a = m["home"], m["away"]
-    headline, highlight = result_headline(m)
-    path = out_dir / f"final-{slug(h['name'])}-{slug(a['name'])}.jpg"
-    winner = h if int(h["score"]) >= int(a["score"]) else a
-    scorers = [clean_player(g["player"]) for g in m["goals"]
-               if g["team"] == winner["full_name"] and "(e.c.)" not in g["player"]]
+    st = relato.story(m, lambda team: sources.is_big_team(team, CFG["big_teams"], m["league"]))
+    stats = sources.match_stats(m)
+    head = relato.headline(m, st, stats)
+    base = f"final-{slug(h['name'])}-{slug(a['name'])}"
     photo = None
-    if scorers:
-        top = max(scorers, key=scorers.count)  # max conserva el primero en caso de empate
-        photo = photos.find_photo(top, require=top, portrait=True)
-    post = {"category": "RESULTADO FINAL", "competition": m["competition"], "headline": headline,
-            "highlight": highlight, "date": m["kickoff"].date()}
-    if photo:
-        render.render_photo(post, photo, path, match=m)
+    if st["protagonista"]:
+        player, team = st["protagonista"]
+        photo = photos.find_player_photo(player, team, m["kickoff"].year - 1)
+    post = {"category": "RESULTADO FINAL", "kicker": head["etiqueta"], "competition": m["competition"],
+            "headline": head["titular"], "highlight": head["destacar"], "date": m["kickoff"].date()}
+    venue_photo = stadium(m.get("venue"), m.get("venue_city"))
+    render.set_background(venue_photo)
+    cover = out_dir / f"{base}.jpg"
+    # portada: foto del protagonista; si no hay, el estadio del partido (así el titular no se pierde);
+    # la tarjeta con escudos queda como último recurso
+    cover_photo = photo or venue_photo
+    if cover_photo:
+        render.render_photo(post, cover_photo, cover, match=m, focus_y=0.0 if photo else 0.45)
     else:
-        render.set_background(stadium(m.get("venue"), m.get("venue_city")))
-        render.render_result({**m, "date": m["kickoff"].date()}, path)
-    goals = "\n".join(f"⚽ {g['minute']} {g['player']}" for g in m["goals"])
-    body = (f"{headline} 🔥\n\nFINAL | {h['full_name']} {h['score']}-{a['score']} {a['full_name']}\n"
-            f"🏆 {m['competition']}\n\n{goals}\n\n¿Quién fue la figura del partido? 👇")
-    caption = build_caption(body, [h["full_name"], a["full_name"], m["competition"]], "ESPN", bg_credit=not photo)
-    if photo:
-        caption += f"\n\n📷 {photo['credit']}"
-    return {"key": f"match:{m['id']}", "title": f"{h['full_name']} vs {a['full_name']}",
-            "image": rel(path), "caption": caption}
+        render.render_result({**m, "date": m["kickoff"].date(), "kicker": head["etiqueta"]}, cover)
+    paths = [cover]
+    if st["linea"] or stats:
+        paths.append(slides.result_timeline(m, st, stats, out_dir / f"{base}-2.jpg"))
+
+    if head.get("caption"):
+        body = head["caption"]
+    else:
+        goals = "\n".join(f"⚽ {g['minute']} {g['player']}" for g in st["linea"])
+        body = (f"{head['titular']} 🔥\n\nFINAL | {h['full_name']} {h['score']}-{a['score']} {a['full_name']}\n"
+                f"🏆 {m['competition']}\n\n{goals}\n\n¿Quién fue la figura del partido? 👇")
+    caption = build_caption(body + "\n\nDesliza para ver cómo fue 👉" if len(paths) > 1 else body,
+                            [h["full_name"], a["full_name"], m["competition"]], "ESPN", bg_credit=not cover_photo)
+    if cover_photo:
+        caption += f"\n\n📷 {cover_photo['credit']}"
+    entry = {"key": f"match:{m['id']}", "title": f"{h['full_name']} vs {a['full_name']}", "caption": caption}
+    if len(paths) > 1:
+        entry["images"] = [rel(x) for x in paths]
+    else:
+        entry["image"] = rel(paths[0])
+    return entry
 
 
 def due(task: str, minutes: int) -> bool:

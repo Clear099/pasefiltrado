@@ -460,3 +460,84 @@ def intro_carousel(out_dir: Path) -> list[Path]:
     for i, b in enumerate(builders, start=2):
         paths.append(b(out_dir / f"presentacion-{i}.jpg", i, n))
     return paths
+
+
+# ---------------------------------------------------------------- resultado: así fue
+
+def result_timeline(m: dict, st: dict, stats: dict, out: Path, i: int = 2, n: int = 2) -> Path:
+    """Segundo slide del resultado: cada gol con su minuto y el marcador parcial, y las estadísticas."""
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "ASÍ FUE")
+    h, a = m["home"], m["away"]
+    # marcador compacto arriba
+    R.mini_crest(d, h, 90, 300, 64)
+    R.mini_crest(d, a, W - 90, 300, 64)
+    fs = font("score", 84)
+    score = f"{h['score']} – {a['score']}"
+    _, top, _, bottom = fs.getbbox("0")
+    paint(d, (s(W / 2) - fs.getlength(score) / 2, s(300) - (top + bottom) / 2), score, fs, B.TEXTO)
+    fn = font("display", 40)
+    for team, x, right in ((h, 136, False), (a, W - 136, True)):
+        name = case(team["name"])
+        _, nt, _, nb = fn.getbbox(name)
+        px = s(x) - (R.klen(name, fn) if right else 0)
+        paint(d, (px, s(300) - (nt + nb) / 2), name, fn, B.TEXTO)
+
+    # línea de tiempo: goles del local a la izquierda, de la visita a la derecha
+    timeline = st["linea"][:9]
+    y = 390
+    # espacio hasta el pie (H - 130), descontando el bloque de estadísticas (título + 4 filas)
+    stats_h = (40 + 50 + 4 * 76) if stats else 0
+    row = min(70, (H - 130 - stats_h - y) / max(len(timeline), 1))
+    d.line([s(W / 2), s(y), s(W / 2), s(y + row * len(timeline))], fill=B.LINEA, width=s(3))
+    fm, fp, fsc = font("score", 30), font("strong", int(min(30, row * 0.45))), font("score", 30)
+    for t in timeline:
+        cy = y + row / 2
+        mark = t["score"].replace("-", " – ")
+        bw = R.text_w(mark, fsc) + 28
+        d.rectangle([s(W / 2 - bw / 2), s(cy - 22), s(W / 2 + bw / 2), s(cy + 22)],
+                    fill=B.ACENTO if t is st.get("decisivo") else B.GRAFITO)
+        _, top, _, bottom = fsc.getbbox("0")
+        paint(d, (s(W / 2) - fsc.getlength(mark) / 2, s(cy) - (top + bottom) / 2), mark, fsc, B.TEXTO)
+        who = t["player"]
+        minute = t["minute"]
+        _, pt, _, pb = fp.getbbox("Ag")
+        if t["side"] == "home":
+            txt = f"{who}  {minute}"
+            while R.text_w(txt, fp) > W / 2 - bw / 2 - 90 and len(who) > 4:
+                who = who[:-2].rstrip() + "…"
+                txt = f"{who}  {minute}"
+            d.text((s(W / 2 - bw / 2 - 24) - fp.getlength(txt), s(cy) - (pt + pb) / 2), txt, font=fp, fill=B.TEXTO)
+        else:
+            txt = f"{minute}  {who}"
+            while R.text_w(txt, fp) > W / 2 - bw / 2 - 90 and len(who) > 4:
+                who = who[:-2].rstrip() + "…"
+                txt = f"{minute}  {who}"
+            d.text((s(W / 2 + bw / 2 + 24), s(cy) - (pt + pb) / 2), txt, font=fp, fill=B.TEXTO)
+        y += row
+
+    # estadísticas en barras enfrentadas
+    if stats:
+        y += 40
+        tracked(d, (s(W / 2) - R.tracked_len("ESTADÍSTICAS", font("label", 22), 4) / 2, s(y)), "ESTADÍSTICAS",
+                font("label", 22), B.ACENTO, 4)
+        y += 50
+        fv, fl = font("score", 34), font("label", 20)
+        for label in ("Posesión", "Remates", "Al arco", "Córners"):
+            hv, av = stats["home"].get(label), stats["away"].get(label)
+            if hv is None or av is None:
+                continue
+            fmt = (lambda v: f"{v:.0f}%") if label == "Posesión" else (lambda v: f"{v:.0f}")
+            total = (hv + av) or 1
+            bar_w = W - 124 - 2 * 110
+            x0 = 62 + 110
+            d.rectangle([s(x0), s(y + 34), s(x0 + bar_w), s(y + 46)], fill=B.GRAFITO)
+            split = x0 + bar_w * hv / total
+            d.rectangle([s(x0), s(y + 34), s(split), s(y + 46)], fill=B.ACENTO if hv >= av else B.SECUNDARIO)
+            d.rectangle([s(split + 4), s(y + 34), s(x0 + bar_w), s(y + 46)], fill=B.ACENTO if av > hv else B.SECUNDARIO)
+            tracked(d, (s(W / 2) - R.tracked_len(label.upper(), fl, 3) / 2, s(y)), label.upper(), fl, B.SECUNDARIO, 3)
+            paint(d, (s(62), s(y + 20)), fmt(hv), fv, B.TEXTO)
+            paint(d, (s(W - 62) - fv.getlength(fmt(av)), s(y + 20)), fmt(av), fv, B.TEXTO)
+            y += 76
+    R.footer(d, "ESPN")
+    return R.finish(img, out)

@@ -262,3 +262,29 @@ def marquee(matches: list[dict], big_teams: list[str], leagues: dict[str, str]) 
         if score > best_score:
             best, best_score = m, score
     return best if best_score >= 20 else None
+
+
+STAT_KEYS = {"possessionPct": "Posesión", "totalShots": "Remates", "shotsOnTarget": "Al arco", "wonCorners": "Córners",
+             "saves": "Atajadas"}
+
+
+def match_stats(m: dict) -> dict:
+    """Estadísticas del partido por equipo: {"home": {"Posesión": 52.5, ...}, "away": {...}}. {} si no hay."""
+    event_id = m["id"].split("-", 1)[1]
+    try:
+        s = requests.get(SUMMARY.format(league=m["league"]), params={"event": event_id}, headers=UA, timeout=20).json()
+    except (requests.RequestException, ValueError) as e:
+        print(f"[espn] estadísticas {m['id']}: {e}")
+        return {}
+    out = {}
+    for t in s.get("boxscore", {}).get("teams", []):
+        side = "home" if t.get("team", {}).get("id") == m["home"]["id"] else "away"
+        vals = {}
+        for st in t.get("statistics", []):
+            if st.get("name") in STAT_KEYS:
+                try:
+                    vals[STAT_KEYS[st["name"]]] = float(st.get("displayValue", "0"))
+                except ValueError:
+                    pass
+        out[side] = vals
+    return out if len(out) == 2 and out["home"] and out["away"] else {}
