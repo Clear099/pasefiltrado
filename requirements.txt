@@ -1,0 +1,6 @@
+pillow>=11
+requests>=2.32
+feedparser>=6
+anthropic>=1.15
+tzdata
+fonttools>=4.50

@@ -1,0 +1,140 @@
+{
+  "theme": "impacto",
+  "timezone": "America/Santiago",
+  "paises": {
+    "mx": "America/Mexico_City",
+    "co": "America/Bogota",
+    "pe": "America/Lima",
+    "ec": "America/Guayaquil",
+    "ve": "America/Caracas",
+    "bo": "America/La_Paz",
+    "cl": "America/Santiago",
+    "ar": "America/Argentina/Buenos_Aires",
+    "uy": "America/Montevideo",
+    "py": "America/Asuncion",
+    "es": "Europe/Madrid"
+  },
+  "fondo_generico": "football stadium night floodlights",
+  "news_per_run": 1,
+  "instant_min_interest": 14,
+  "instant_max_per_day": 3,
+  "max_posts_per_day": 8,
+  "max_news_age_hours": 18,
+  "leagues": {
+    "uefa.champions": "Champions League",
+    "conmebol.libertadores": "Copa Libertadores",
+    "esp.1": "LaLiga",
+    "eng.1": "Premier League",
+    "ita.1": "Serie A",
+    "ger.1": "Bundesliga",
+    "fra.1": "Ligue 1",
+    "fifa.worldq.conmebol": "Eliminatorias",
+    "conmebol.america": "Copa América",
+    "conmebol.sudamericana": "Copa Sudamericana",
+    "arg.1": "Liga Argentina",
+    "bra.1": "Brasileirão",
+    "uru.1": "Liga Uruguaya",
+    "chi.1": "Primera División Chile",
+    "col.1": "Liga Colombiana"
+  },
+  "big_teams": {
+    "europa": [
+      "Real Madrid",
+      "Barcelona",
+      "Atlético Madrid",
+      "Athletic Club",
+      "Manchester City",
+      "Manchester United",
+      "Liverpool",
+      "Arsenal",
+      "Chelsea",
+      "Tottenham Hotspur",
+      "Newcastle United",
+      "Bayern Munich",
+      "Borussia Dortmund",
+      "Bayer Leverkusen",
+      "Paris Saint-Germain",
+      "Marseille",
+      "Internazionale",
+      "AC Milan",
+      "Juventus",
+      "Napoli",
+      "AS Roma"
+    ],
+    "sudamerica": [
+      "Boca Juniors",
+      "River Plate",
+      "Racing Club",
+      "Independiente",
+      "San Lorenzo",
+      "Flamengo",
+      "Palmeiras",
+      "Corinthians",
+      "São Paulo",
+      "Santos",
+      "Fluminense",
+      "Botafogo",
+      "Grêmio",
+      "Internacional",
+      "Atlético-MG",
+      "Peñarol",
+      "Nacional",
+      "Colo Colo",
+      "Universidad de Chile",
+      "Universidad Católica",
+      "Atlético Nacional",
+      "Millonarios",
+      "LDU Quito",
+      "Olimpia",
+      "Cerro Porteño"
+    ],
+    "selecciones": [
+      "Argentina",
+      "Brazil",
+      "Uruguay",
+      "Colombia",
+      "Chile",
+      "Ecuador",
+      "Peru",
+      "Paraguay",
+      "Spain",
+      "Mexico"
+    ]
+  },
+  "feeds": [
+    {
+      "name": "Google News",
+      "url": "https://news.google.com/rss/search?q=f%C3%BAtbol+when:1d&hl=es-419&gl=CL&ceid=CL:es-419"
+    },
+    {
+      "name": "Google News",
+      "url": "https://news.google.com/rss/search?q=fichaje+OR+lesi%C3%B3n+OR+entrenador+f%C3%BAtbol+when:1d&hl=es-419&gl=CL&ceid=CL:es-419"
+    },
+    {
+      "name": "Marca",
+      "url": "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"
+    },
+    {
+      "name": "Mundo Deportivo",
+      "url": "https://www.mundodeportivo.com/rss/futbol"
+    },
+    {
+      "name": "BBC Sport",
+      "url": "https://feeds.bbci.co.uk/sport/football/rss.xml"
+    }
+  ],
+  "hashtags_base": [
+    "#futbol",
+    "#pasefiltrado",
+    "#noticiasdefutbol"
+  ],
+  "logo": "insignia",
+  "solo_partidos_grandes": {
+    "conmebol.sudamericana": 1,
+    "arg.1": 2,
+    "bra.1": 2,
+    "uru.1": 2,
+    "chi.1": 2,
+    "col.1": 2
+  }
+}
