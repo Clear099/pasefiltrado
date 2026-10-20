@@ -356,6 +356,9 @@ def main() -> None:
             print(f"\n=== {e.get('images') or e['image']}\n{e['caption']}")
         return
 
+    created = dt.datetime.now(TZ).isoformat()
+    for e in entries:
+        e["created"] = created
     pending = load("pending.json", [])
     pending += entries
     save("pending.json", pending)

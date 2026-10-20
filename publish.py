@@ -17,7 +17,7 @@ import time
 
 import requests
 
-from run import TZ, load, save
+from run import CFG, TZ, load, save
 
 API = f"https://graph.instagram.com/{os.environ.get('IG_API_VERSION', 'v24.0')}"
 
@@ -79,7 +79,14 @@ def main() -> None:
         return refresh_token()
 
     base = os.environ["PUBLIC_BASE_URL"].rstrip("/")
-    pending = load("pending.json", [])
+    # una noticia de hace horas ya no es noticia: lo que quedó atrasado en la cola se descarta
+    limit = dt.datetime.now(TZ) - dt.timedelta(hours=CFG.get("pending_max_hours", 6))
+    pending = []
+    for entry in load("pending.json", []):
+        if entry.get("created") and dt.datetime.fromisoformat(entry["created"]) < limit:
+            print(f"[descartado por antiguo] {entry['key']}")
+        else:
+            pending.append(entry)
     history = load("history.json", [])
     failed = []
     for i, entry in enumerate(pending):
