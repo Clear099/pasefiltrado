@@ -17,6 +17,7 @@ import time
 
 import requests
 
+import threads
 from run import CFG, TZ, load, save
 
 API = f"https://graph.instagram.com/{os.environ.get('IG_API_VERSION', 'v24.0')}"
@@ -137,6 +138,11 @@ def main() -> None:
                 print(f"[historia] {entry['key']}")
             except (RuntimeError, requests.RequestException) as e:
                 print(f"[historia] no se pudo publicar: {e}")  # la historia nunca bloquea el post
+        if threads.available():
+            try:
+                print(f"[threads] {entry['key']} → {threads.publish_entry(entry, base)}")
+            except (RuntimeError, requests.RequestException) as e:
+                print(f"[threads] no se pudo publicar: {e}")  # Threads nunca bloquea Instagram
         if entry.get("reel"):
             try:
                 feed = "true" if CFG.get("reels", {}).get("en_feed", False) else "false"

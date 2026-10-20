@@ -145,6 +145,14 @@ En el repositorio, *Settings → Secrets and variables → Actions → New repos
 | `IG_ACCESS_TOKEN` | El token del paso 3 |
 | `GH_PAT` (opcional, recomendado) | Un token *fine-grained* de GitHub (*Settings → Developer settings → Personal access tokens*) solo para este repositorio, con permiso **Secrets: Read and write**. Con él, el token de Instagram se renueva solo cada lunes; sin él, hay que renovarlo a mano antes de los 60 días |
 
+### Paso 5b · Threads (opcional)
+Cada post de Instagram se publica también en Threads (`threads.py`), con el texto recortado a 500 bytes.
+1. Abre Threads con la cuenta @pasefiltradonews para crear su perfil.
+2. En developers.facebook.com, en la misma app: **Agregar casos de uso → Acceder a la API de Threads**. En sus permisos agrega `threads_basic` y `threads_content_publish`, y en su configuración pon como URI de redireccionamiento `https://localhost/`. Ahí también están el **ID** y la **clave secreta de la app de Threads**.
+3. **Roles de la app → Agregar personas → Evaluador de Threads** → `pasefiltradonews`. Acepta en Threads: *Configuración → Cuenta → Permisos de sitios web → Invitaciones*.
+4. En tu computador: `python threads_token.py`. Pide el ID y la clave secreta (no se guardan), abre la autorización y, cuando el navegador quede en `https://localhost/?code=...` (con un error de página, es normal), pegas esa dirección. Imprime el token.
+5. Guárdalo como secreto `THREADS_ACCESS_TOKEN` en GitHub. Con `GH_PAT` cargado, se renueva solo cada lunes.
+
 ### Paso 6 · Primera prueba
 1. *Actions → Publicar → Run workflow* con la opción **`verificar`**: comprueba el token y la cuenta sin publicar nada. El registro debe decir "Conectado a @pasefiltradonews".
 2. Luego *Run workflow* con `manana`: debería salir la previa del partido del día (o la agenda).
