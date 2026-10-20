@@ -1,4 +1,4 @@
-# PASE FILTRADO · @pasofiltradonews
+# PASE FILTRADO · @pasefiltradonews
 
 Cuenta de Instagram automatizada de noticias de fútbol. Cada día genera y publica entre 6 y 7 posts con el diseño de la marca.
 
@@ -97,7 +97,7 @@ Ligas, feeds, hashtags y cantidad de noticias se cambian en `config.json`.
 ## 5. Puesta en marcha
 
 ### Paso 1 · Cuenta de Instagram
-1. La cuenta es **@pasofiltradonews** (`HANDLE` en `brand.py`). @pasefiltrado ya lo usa un medio deportivo, así que no lo usamos.
+1. La cuenta es **@pasefiltradonews** (`HANDLE` en `brand.py`). @pasefiltrado ya lo usa un medio deportivo, así que no lo usamos.
 2. Sube `assets/brand/perfil.jpg` como foto de perfil y pega la bio de la sección 1.
 3. Pásala a **cuenta profesional**: *Configuración → Tipo de cuenta y herramientas → Cambiar a cuenta profesional → Creador* (o Empresa), en la categoría *Medio de comunicación / noticias*.
 4. Crea las historias destacadas con las portadas `assets/brand/destacada-*.jpg`.
@@ -115,7 +115,7 @@ Ligas, feeds, hashtags y cantidad de noticias se cambian en `config.json`.
 1. Entra a developers.facebook.com con tu cuenta de Facebook y regístrate como desarrollador si te lo pide.
 2. *Mis apps → Crear app*, elige el caso de uso **"Administrar mensajes y contenido en Instagram"**, ponle de nombre "Pase Filtrado Bot" y créala. No hace falta vincular un portfolio comercial.
 3. En el panel de la app ve a *Casos de uso → Instagram → Configuración de la API con inicio de sesión de Instagram*.
-4. En **"Generar tokens de acceso"** pulsa *Agregar cuenta*, inicia sesión con @pasofiltradonews y acepta los permisos `instagram_business_basic` e `instagram_business_content_publish`.
+4. En **"Generar tokens de acceso"** pulsa *Agregar cuenta*, inicia sesión con @pasefiltradonews y acepta los permisos `instagram_business_basic` e `instagram_business_content_publish`.
 5. Ahí aparecen dos datos: el **ID de la cuenta de Instagram** (un número) y el **token de acceso**, que dura 60 días. Cópialos.
    La app puede quedar en modo *desarrollo*: para publicar en tu propia cuenta no necesitas revisión de Meta.
 
