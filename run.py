@@ -320,7 +320,8 @@ def slot_monitor(out_dir: Path, today: dt.date) -> list[dict]:
         instant_today += 1
 
     now = dt.datetime.now(TZ)
-    room = posts_today() + len(entries) < CFG["max_posts_per_day"]
+    # sin clave de Claude no hay noticias: no se marcan como hechas para no perder la hora
+    room = writer.has_ai() and posts_today() + len(entries) < CFG["max_posts_per_day"]
     focus = duel(mq) if mq else None
     # noticias a las horas de config.json (la revisión semanal puede moverlas)
     if now.hour in CFG.get("horas_noticias", []) and room and due(f"noticias-{now.hour}", 23 * 60):
