@@ -4,7 +4,7 @@ name: Revisión semanal
 
 on:
   schedule:
-    - cron: "0 13 * * 1"   # lunes 10:00 Chile
+    - cron: "11 13 * * 1"  # lunes 10:11 Chile
   workflow_dispatch:
 
 permissions:

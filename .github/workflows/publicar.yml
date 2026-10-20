@@ -4,11 +4,12 @@ name: Publicar
 
 on:
   schedule:
-    - cron: "0 12 * * *"         # 09:00 Chile · previa del partido del día (o agenda)
-    - cron: "30 2 * * *"         # 23:30 Chile · carrusel "La fecha en 1 minuto"
-    - cron: "*/15 12-23 * * *"   # 09:00–20:59 Chile · monitor: resultados al instante, noticias
+    # minutos "raros" a propósito: GitHub atrasa o salta los horarios en :00/:15/:30, que son los más congestionados
+    - cron: "7 12 * * *"         # 09:07 Chile · previa del partido del día (o agenda)
+    - cron: "37 2 * * *"         # 23:37 Chile · carrusel "La fecha en 1 minuto"
+    - cron: "4-59/15 12-23 * * *"   # 09:00–20:59 Chile · monitor: resultados al instante, noticias
                                  # (a las horas de config.json), última hora y comentarios
-    - cron: "*/15 0-3 * * *"     # 21:00–00:59 Chile · monitor
+    - cron: "4-59/15 0-3 * * *"  # 21:00–00:59 Chile · monitor
   workflow_dispatch:
     inputs:
       slot:
@@ -69,8 +70,8 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            "0 12 * * *") SLOT=manana ;;
-            "30 2 * * *") SLOT=resultados ;;
+            "7 12 * * *") SLOT=manana ;;
+            "37 2 * * *") SLOT=resultados ;;
             "") SLOT="${{ inputs.slot }}" ;;
             *) SLOT=monitor ;;
           esac
