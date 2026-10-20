@@ -1,0 +1,54 @@
+# Latido: mantiene vivo el monitor sin depender de los horarios programados de GitHub, que con
+# frecuencias altas se atrasan o se saltan. Cada ejecución espera ~14 minutos, lanza "Publicar"
+# con el horario "monitor" y se vuelve a lanzar a sí misma. Los lanzamientos entre workflows
+# (workflow_dispatch con GITHUB_TOKEN) sí son confiables.
+#
+# - Solo corre entre las 09:00 y las 01:00 de Chile (12–04 UTC); de noche la cadena se detiene.
+# - Si la cadena se corta, el horario de respaldo la reinicia dentro de una hora.
+# - Si ya hay otro latido en curso, este termina sin hacer nada (nunca hay dos cadenas).
+name: Latido
+
+on:
+  schedule:
+    - cron: "23 * * * *"   # respaldo: reinicia la cadena si se cortó
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+jobs:
+  latido:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Esperar, lanzar el monitor y el siguiente latido
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          api="https://api.github.com/repos/$REPO/actions/workflows"
+          auth=(-H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json")
+
+          # el latido anterior lanza a este justo antes de terminar: se le da tiempo para cerrar
+          sleep 60
+
+          # ¿hay un latido más antiguo en curso o en cola? entonces este sobra (sigue siempre el más antiguo)
+          otros=0
+          for estado in in_progress queued; do
+            n=$(curl -sf "${auth[@]}" "$api/latido.yml/runs?status=$estado&per_page=20" \
+                | jq --arg id "$RUN_ID" '[.workflow_runs[] | select(.id < ($id|tonumber))] | length')
+            otros=$((otros + n))
+          done
+          if [ "$otros" -gt 0 ]; then echo "Ya hay otro latido activo."; exit 0; fi
+
+          activo() { h=$(date -u +%H); [ "$h" -ge 12 ] || [ "$h" -lt 4 ]; }
+          if ! activo; then echo "Fuera de horario (01:00–09:00 Chile): la cadena descansa."; exit 0; fi
+
+          sleep 840  # ~14 minutos entre vueltas
+
+          curl -sf -X POST "${auth[@]}" "$api/publicar.yml/dispatches" \
+               -d '{"ref":"main","inputs":{"slot":"monitor"}}' && echo "Monitor lanzado."
+          if activo; then
+            curl -sf -X POST "${auth[@]}" "$api/latido.yml/dispatches" -d '{"ref":"main"}' && echo "Siguiente latido lanzado."
+          fi

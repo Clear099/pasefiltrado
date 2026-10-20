@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # para reiniciar el latido si se cortó
 
 concurrency:
   group: publicar
@@ -120,6 +121,25 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
         run: python metrics.py
+
+      # si la cadena de latidos se cortó, la reinicia (ver latido.yml)
+      - name: Asegurar latido
+        if: steps.check.outputs.run == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          api="https://api.github.com/repos/${{ github.repository }}/actions/workflows/latido.yml"
+          activos=0
+          for estado in in_progress queued; do
+            n=$(curl -sf -H "Authorization: Bearer $GH_TOKEN" "$api/runs?status=$estado&per_page=5" | jq '.workflow_runs | length')
+            activos=$((activos + n))
+          done
+          if [ "$activos" -eq 0 ]; then
+            curl -sf -X POST -H "Authorization: Bearer $GH_TOKEN" "$api/dispatches" -d '{"ref":"main"}' && echo "Latido reiniciado."
+          else
+            echo "Latido activo."
+          fi
 
       - name: Guardar historial
         if: steps.check.outputs.run == 'true'
