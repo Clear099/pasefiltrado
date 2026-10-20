@@ -96,16 +96,46 @@ Ligas, feeds, hashtags y cantidad de noticias se cambian en `config.json`.
 
 ## 5. Puesta en marcha
 
-1. **Crear la cuenta de Instagram** `@pasefiltrado`, subir la foto de perfil y la bio, y cambiarla a **cuenta profesional** (Creador o Empresa): *Configuración → Tipo de cuenta*.
-2. **Crear una app en Meta for Developers** (developers.facebook.com) de tipo *Business*, añadir el producto **Instagram** → *API setup with Instagram login*, y conectar la cuenta. Ahí se genera el **token** y se ve el **ID de usuario de Instagram**. Permisos: `instagram_business_basic` e `instagram_business_content_publish`.
-3. **Clave de Claude**: en console.anthropic.com → API Keys. El costo estimado es de unos centavos de dólar al día.
-4. **Repositorio público en GitHub** con esta carpeta. Debe ser público porque Instagram descarga las imágenes desde ahí.
-5. En el repo, en *Settings → Secrets and variables → Actions*, crear estos secretos:
-   - `ANTHROPIC_API_KEY`
-   - `IG_USER_ID`
-   - `IG_ACCESS_TOKEN`
-   - `GH_PAT` (opcional): sirve para que el token de Instagram se renueve solo cada semana.
-6. Para probar, entrar a *Actions → Publicar → Run workflow*.
+### Paso 1 · Cuenta de Instagram
+1. Crea la cuenta **@pasefiltrado**. Si el nombre está tomado, prueba `pasefiltrado.ok`, `pasefiltradofc` o `pase.filtrado`, y cambia `HANDLE` en `brand.py`.
+2. Sube `assets/brand/perfil.jpg` como foto de perfil y pega la bio de la sección 1.
+3. Pásala a **cuenta profesional**: *Configuración → Tipo de cuenta y herramientas → Cambiar a cuenta profesional → Creador* (o Empresa), en la categoría *Medio de comunicación / noticias*.
+4. Crea las historias destacadas con las portadas `assets/brand/destacada-*.jpg`.
+
+### Paso 2 · Repositorio en GitHub
+1. En github.com/new crea un repositorio **público** llamado `pasefiltrado`, **vacío**: sin README, sin .gitignore y sin licencia. Tiene que ser público porque Instagram descarga las imágenes desde ahí.
+2. Sube el código (el repositorio local ya tiene el primer commit):
+   ```bash
+   git remote add origin https://github.com/TU_USUARIO/pasefiltrado.git
+   git push -u origin main
+   ```
+3. En *Settings → Actions → General → Workflow permissions*, elige **Read and write permissions**. El bot guarda las imágenes y el historial en el repositorio.
+
+### Paso 3 · App de Meta (para publicar por API)
+1. Entra a developers.facebook.com con tu cuenta de Facebook y regístrate como desarrollador si te lo pide.
+2. *Mis apps → Crear app*, elige el caso de uso **"Administrar mensajes y contenido en Instagram"**, ponle de nombre "Pase Filtrado Bot" y créala. No hace falta vincular un portfolio comercial.
+3. En el panel de la app ve a *Casos de uso → Instagram → Configuración de la API con inicio de sesión de Instagram*.
+4. En **"Generar tokens de acceso"** pulsa *Agregar cuenta*, inicia sesión con @pasefiltrado y acepta los permisos `instagram_business_basic` e `instagram_business_content_publish`.
+5. Ahí aparecen dos datos: el **ID de la cuenta de Instagram** (un número) y el **token de acceso**, que dura 60 días. Cópialos.
+   La app puede quedar en modo *desarrollo*: para publicar en tu propia cuenta no necesitas revisión de Meta.
+
+### Paso 4 · Clave de Claude
+En console.anthropic.com, *API Keys → Create Key*. Carga algo de saldo en *Billing*: con la configuración actual el gasto ronda unos centavos de dólar al día.
+
+### Paso 5 · Secretos en GitHub
+En el repositorio, *Settings → Secrets and variables → Actions → New repository secret*:
+
+| Secreto | Valor |
+|---|---|
+| `ANTHROPIC_API_KEY` | La clave del paso 4 |
+| `IG_USER_ID` | El ID de la cuenta del paso 3 |
+| `IG_ACCESS_TOKEN` | El token del paso 3 |
+| `GH_PAT` (opcional, recomendado) | Un token *fine-grained* de GitHub (*Settings → Developer settings → Personal access tokens*) solo para este repositorio, con permiso **Secrets: Read and write**. Con él, el token de Instagram se renueva solo cada lunes; sin él, hay que renovarlo a mano antes de los 60 días |
+
+### Paso 6 · Primera prueba
+1. *Actions → Publicar → Run workflow*, con el horario `manana`. Debería salir la previa del partido del día (o la agenda).
+2. Revisa el post en Instagram. Si algo falla, el registro de la ejecución muestra el error de Instagram.
+3. Desde ese momento corre solo según la parrilla de la sección 3.
 
 ## 6. Comandos locales
 
