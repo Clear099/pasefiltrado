@@ -22,6 +22,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import brand as B
+import clave
 import datos
 import horarios
 import photos
@@ -35,6 +36,7 @@ import writer
 ROOT = Path(__file__).parent
 DATA = ROOT / "data"
 CFG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
+MEJORAS = CFG.get("mejoras", {})  # mejoras opcionales: se prenden una a una en config.json
 TZ = ZoneInfo(CFG["timezone"])
 
 
@@ -122,7 +124,12 @@ def stadium(venue: str | None = None, city: str | None = None) -> dict | None:
     photo = None
     if venue:
         query = f"{venue} {city}" if city and city.lower() not in venue.lower() else venue
-        photo = photos.find_photo(query, min_width=1600, require=venue)
+        # con la mejora "fotos" se descartan fotos históricas (blanco y negro, tribunas de otra época)
+        photo = photos.find_photo(query, min_width=1600, require=venue,
+                                  min_year=1995 if MEJORAS.get("fotos") else 0)
+        if not photo and MEJORAS.get("fotos") and query != venue:
+            # sin la ciudad la búsqueda encuentra más (pocas fotos la nombran); el nombre exacto sigue exigido
+            photo = photos.find_photo(venue, min_width=1600, require=venue, min_year=1995)
     return photo or photos.find_photo(CFG["fondo_generico"], min_width=1600)
 
 
@@ -237,6 +244,18 @@ def slot_agenda(out_dir: Path, today: dt.date, matches: list[dict]) -> list[dict
 
 # ---------------------------------------------------------------- monitor: resultado al instante
 
+def cover_players(m: dict, st: dict) -> list[tuple[str, dict]]:
+    """A quién buscar para la foto de portada: el protagonista y, con la mejora "fotos", el resto de
+    los goleadores del ganador (del gol decisivo hacia atrás), porque no todos tienen foto libre."""
+    out = [st["protagonista"]] if st["protagonista"] else []
+    if MEJORAS.get("fotos") and st.get("ganador"):
+        side = "home" if st["ganador"] is m["home"] else "away"
+        for g in reversed(st["linea"]):
+            if g["side"] == side and g["player"] not in [p for p, _ in out]:
+                out.append((g["player"], m[side]))
+    return out[:4]
+
+
 def result_post(m: dict, out_dir: Path) -> dict:
     """Resultado al instante: portada con la historia del partido y slide "Así fue" (goles y estadísticas).
 
@@ -250,9 +269,10 @@ def result_post(m: dict, out_dir: Path) -> dict:
     ko_note = relato.series_note(m, serie)
     base = f"final-{slug(h['name'])}-{slug(a['name'])}"
     photo = None
-    if st["protagonista"]:
-        player, team = st["protagonista"]
+    for player, team in cover_players(m, st):
         photo = photos.find_player_photo(player, team, m["kickoff"].year - 1)
+        if photo:
+            break
     competition = m["competition"]
     if serie:  # en la portada: "COPA SUDAMERICANA · SEMIFINAL · GLOBAL 2-3"
         g = serie["global"]
@@ -269,19 +289,34 @@ def result_post(m: dict, out_dir: Path) -> dict:
         render.render_photo(post, cover_photo, cover, match=m, focus_y=0.0 if photo else 0.45)
     else:
         render.render_result({**m, "date": m["kickoff"].date(), "kicker": head["etiqueta"]}, cover)
-    paths = [cover]
+    builders = []
     if st["linea"] or stats:
-        paths.append(slides.result_timeline(m, st, stats, out_dir / f"{base}-2.jpg"))
+        builders.append(lambda p, i, n: slides.result_timeline(m, st, stats, p, i, n))
+    summary = sources.match_summary(m) if MEJORAS.get("la_clave") or MEJORAS.get("tabla") else {}
+    keys = clave.facts(m, st, stats, serie, summary.get("form")) if MEJORAS.get("la_clave") else []
+    if len(keys) >= 2:
+        builders.append(lambda p, i, n: slides.preview_facts(m, keys, p, i, n, label="LA CLAVE",
+                                                             title="Lo que explica el resultado", highlight=("explica",)))
+    table = summary.get("table") or {}
+    if MEJORAS.get("tabla") and not serie and {h["full_name"], a["full_name"]} <= set(table):
+        builders.append(lambda p, i, n: slides.result_table(m, table, p, i, n))
+    # en el caption, la clave que no repita el global (ese ya va en la línea de la eliminatoria)
+    key_line = next((k["frase"] for k in keys if not (ko_note and k["tipo"] == "serie")), None)
+    n = len(builders) + 1
+    paths = [cover] + [b(out_dir / f"{base}-{i}.jpg", i, n) for i, b in enumerate(builders, start=2)]
 
     if head.get("caption"):
         body = head["caption"]
         if ko_note and "global" not in body.lower() and "vuelta" not in body.lower():
             body += f"\n\n{ko_note}"
+        if key_line:
+            body += f"\n\n📊 La clave: {key_line}"
     else:
         goals = "\n".join(f"⚽ {g['minute']} {g['player']}" for g in st["linea"])
         body = (f"{head['titular']} 🔥\n\nFINAL | {h['full_name']} {h['score']}-{a['score']} {a['full_name']}\n"
                 f"🏆 {m['competition']}" + (f" · {serie['ronda']}" if serie else "")
-                + (f"\n{ko_note}" if ko_note else "") + f"\n\n{goals}\n\n¿Quién fue la figura del partido? 👇")
+                + (f"\n{ko_note}" if ko_note else "") + f"\n\n{goals}"
+                + (f"\n\n📊 La clave: {key_line}" if key_line else "") + "\n\n¿Quién fue la figura del partido? 👇")
     caption = build_caption(body + "\n\nDesliza para ver cómo fue 👉" if len(paths) > 1 else body,
                             [h["full_name"], a["full_name"], m["competition"]], "ESPN", bg_credit=not cover_photo)
     if cover_photo:

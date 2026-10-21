@@ -30,12 +30,14 @@ def _plain(text: str) -> str:
     return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
 
 
-def find_photo(query: str, min_width: int = 900, require: str | None = None, portrait: bool = False) -> dict | None:
+def find_photo(query: str, min_width: int = 900, require: str | None = None, portrait: bool = False,
+               min_year: int = 0) -> dict | None:
     """Busca la mejor foto libre para la consulta. Devuelve ruta local y crédito.
 
     require: todas sus palabras deben aparecer en el título del archivo (por ejemplo el nombre
     completo), para no publicar la foto de otra persona.
     portrait: solo fotos verticales; descarta tomas de estadio o de grupo.
+    min_year: descarta fotos fechadas antes de ese año y las que no tienen fecha.
     """
     try:
         r = requests.get(API, params={
@@ -60,6 +62,10 @@ def find_photo(query: str, min_width: int = 900, require: str | None = None, por
             continue
         if portrait and info["height"] < info["width"] * 1.05:
             continue
+        if min_year:
+            when = re.search(r"(1[89]\d\d|20\d\d)", _clean(meta.get("DateTimeOriginal", {}).get("value", "")))
+            if not when or int(when.group(1)) < min_year:
+                continue
         # preferimos fotos grandes, que nombren lo buscado en el título y sin "compartir igual" (SA),
         # porque con SA nuestra imagen derivada también quedaría bajo CC BY-SA
         score = min(info["width"], 2000) / 1000

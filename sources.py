@@ -244,7 +244,8 @@ def match_summary(m: dict) -> dict:
         for entry in group.get("standings", {}).get("entries", []):
             stats = {x.get("name"): x.get("displayValue") for x in entry.get("stats", [])}
             table[entry.get("team")] = {"puesto": stats.get("rank"), "puntos": stats.get("points"),
-                                        "jugados": stats.get("gamesPlayed")}
+                                        "jugados": stats.get("gamesPlayed"), "dg": stats.get("pointDifferential"),
+                                        "id": entry.get("id")}
     return {"form": form, "h2h": h2h, "leaders": leaders, "table": table}
 
 

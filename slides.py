@@ -293,11 +293,12 @@ def preview_numbers(m: dict, summary: dict, out: Path, i: int, n: int) -> Path:
     return R.finish(img, out)
 
 
-def preview_facts(m: dict, facts: list[dict], out: Path, i: int, n: int) -> Path:
+def preview_facts(m: dict, facts: list[dict], out: Path, i: int, n: int, label: str = "EL DATO",
+                  title: str = "Lo que nadie te cuenta", highlight: tuple = ("nadie",)) -> Path:
     """El dato que nadie te cuenta: hasta 3 datos con una cifra grande cada uno."""
     img, d = R.base(right=f"{i}/{n}")
-    chip(d, 62, 196, "EL DATO", filled=True)
-    y = _title(d, "Lo que nadie te cuenta", ["nadie"]) + 40
+    chip(d, 62, 196, label, filled=True)
+    y = _title(d, title, list(highlight)) + 40
     box_h = min(250, (H - 170 - y) / max(len(facts), 1) - 22)
     for f in facts:
         d.rectangle([s(62), s(y), s(W - 62), s(y + box_h)], fill=B.GRAFITO)
@@ -629,5 +630,56 @@ def result_timeline(m: dict, st: dict, stats: dict, out: Path, i: int = 2, n: in
                 d.rectangle([s(x0 + half + 3), s(by), s(x0 + half + 3 + (half - 3) * av / top_v), s(by + 9)],
                             fill=B.ACENTO if av > hv else B.SECUNDARIO)
             y += step
+    R.footer(d, "ESPN")
+    return R.finish(img, out)
+
+
+def result_table(m: dict, table: dict, out: Path, i: int, n: int) -> Path:
+    """Así queda la tabla: las filas alrededor de los dos equipos, con ellos resaltados."""
+    img, d = R.base(right=f"{i}/{n}")
+    chip(d, 62, 196, "LA TABLA")
+    y = _title(d, "Así queda la tabla", ["tabla"]) + 30
+    rows = list(table.items())
+    names = {m["home"]["full_name"], m["away"]["full_name"]}
+    idx = [k for k, (name, _) in enumerate(rows) if name in names]
+    # ventana de 9 filas: el top si ambos están arriba; si no, alrededor de cada equipo
+    show = set(range(min(9, len(rows)))) if max(idx) < 9 else set()
+    for k in idx:
+        if k not in show:
+            show |= set(range(max(0, k - 2), min(len(rows), k + 3)))
+    show = sorted(show)[:11]
+    fl, fv, fn = font("label", 20), font("score", 34), font("strong", 32)
+    cols = {"PJ": W - 330, "DG": W - 210, "PTS": W - 90}
+    for label, x in cols.items():
+        tracked(d, (s(x) - tracked_len(label, fl, 3) / 2, s(y)), label, fl, B.SECUNDARIO, 3)
+    y += 40
+    row_h = min(78, (H - 150 - y) / max(len(show) + (len(show) > 1), 1))
+    prev = None
+    for k in show:
+        if prev is not None and k != prev + 1:  # salto en la tabla
+            _centered(d, "· · ·", fl, y + row_h * 0.15, B.SECUNDARIO)
+            y += row_h * 0.6
+        name, e = rows[k]
+        mine = name in names
+        if mine:
+            d.rectangle([s(62), s(y + 4), s(W - 62), s(y + row_h - 4)], fill=B.GRAFITO)
+            d.rectangle([s(62), s(y + 4), s(70), s(y + row_h - 4)], fill=B.ACENTO)
+        cy = y + row_h / 2
+        pos = str(e.get("puesto") or k + 1)
+        _, top, _, bottom = fv.getbbox("0")
+        paint(d, (s(130) - fv.getlength(pos) / 2, s(cy) - (top + bottom) / 2), pos, fv, B.TEXTO if mine else B.SECUNDARIO)
+        team = {"id": e.get("id"), "logo": f"https://a.espncdn.com/i/teamlogos/soccer/500/{e.get('id')}.png"}
+        R.mini_crest(d, team, 205, cy, 46)
+        short = name
+        while R.text_w(short, fn) > cols["PJ"] - 290 and len(short) > 4:
+            short = short[:-2].rstrip() + "…"
+        _, nt, _, nb = fn.getbbox("Ag")
+        d.text((s(250), s(cy) - (nt + nb) / 2), short, font=fn, fill=B.TEXTO if mine else B.SECUNDARIO)
+        for label, key in (("PJ", "jugados"), ("DG", "dg"), ("PTS", "puntos")):
+            v = str(e.get(key) or "0")
+            paint(d, (s(cols[label]) - fv.getlength(v) / 2, s(cy) - (top + bottom) / 2), v, fv,
+                  B.TEXTO if (mine or label == "PTS") else B.SECUNDARIO)
+        y += row_h
+        prev = k
     R.footer(d, "ESPN")
     return R.finish(img, out)

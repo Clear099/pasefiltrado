@@ -155,5 +155,11 @@
     "activo": true,
     "en_feed": false
   },
-  "historias": true
+  "historias": true,
+  "mejoras": {
+    "_nota": "Mejoras opcionales de los resultados. Se prenden una a una cambiando false por true.",
+    "la_clave": false,
+    "tabla": false,
+    "fotos": false
+  }
 }
