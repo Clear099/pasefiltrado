@@ -321,7 +321,9 @@ def slot_monitor(out_dir: Path, today: dt.date) -> list[dict]:
         if f"match:{m['id']}" in keys:
             continue
         is_marquee = mq is not None and m["id"] == mq["id"]
-        if not is_marquee and (interest(m) < CFG["instant_min_interest"] or instant_today >= CFG["instant_max_per_day"]):
+        # si hicimos la previa, el resultado no puede faltar aunque ya se haya llegado al tope diario
+        previewed = f"preview:{m['id']}" in keys
+        if not (is_marquee or previewed) and (interest(m) < CFG["instant_min_interest"] or instant_today >= CFG["instant_max_per_day"]):
             continue
         print(f"[monitor] terminó {duel(m)}: {m['home']['score']}-{m['away']['score']}")
         entries.append(result_post(m, out_dir))

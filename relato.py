@@ -120,17 +120,17 @@ def template(m: dict, st: dict) -> dict:
     t = top["tipo"]
     if t == "remontada":
         goles = {1: "un gol", 2: "dos goles", 3: "tres goles"}.get(top["desventaja"], f"{top['desventaja']} goles")
-        line = f"El {win['name']} remonta {goles} y vence {ws}-{ls} al {lose['name']}"
+        line = f"{win['name']} remonta {goles} y vence {ws}-{ls} a {lose['name']}"
     elif t == "agonico":
         line = f"{surname(top['jugador'])} lo gana al {top['minuto']}: {win['name']} {ws}-{ls} {lose['name']}"
     elif t == "partido_loco":
         line = f"{top['goles']} goles y triunfo del {win['name']} {ws}-{ls} sobre el {lose['name']}"
     elif t in ("hat_trick", "doblete"):
-        line = f"{'Hat-trick' if t == 'hat_trick' else 'Doblete'} de {surname(top['jugador'])} y el {win['name']} vence {ws}-{ls}"
+        line = f"{'Hat-trick' if t == 'hat_trick' else 'Doblete'} de {surname(top['jugador'])} y {win['name']} vence {ws}-{ls}"
     elif t == "goleada":
-        line = f"El {win['name']} golea {ws}-{ls} al {lose['name']}"
+        line = f"{win['name']} golea {ws}-{ls} a {lose['name']}"
     else:
-        line = f"El {win['name']} vence {ws}-{ls} al {lose['name']}"
+        line = f"{win['name']} vence {ws}-{ls} a {lose['name']}"
     hero = st["protagonista"][0] if st["protagonista"] else None
     return {"etiqueta": kicker, "titular": line, "destacar": [surname(hero)] if hero else [win["name"]]}
 
