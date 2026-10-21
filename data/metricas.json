@@ -1,0 +1,208 @@
+{
+  "seguidores": [
+    {
+      "fecha": "2026-10-21",
+      "valor": 5
+    }
+  ],
+  "posts": {
+    "18574954600072176": {
+      "key": "",
+      "tipo": "manual",
+      "titulo": "Boca conquistó el Maracaná y jugará la final de la Copa Sudamericana 🔥\nDi Lollo ",
+      "fecha": "2026-10-20T23:42:09-03:00",
+      "formato": "VIDEO",
+      "permalink": "https://www.instagram.com/reel/DevXAfwjIy-/",
+      "metricas": {
+        "likes": 1,
+        "comments": 0,
+        "reach": 37,
+        "views": 58,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 1
+      },
+      "actualizado": "2026-10-21T04:57:25.693614-03:00"
+    },
+    "18027386834860333": {
+      "key": "match:conmebol.sudamericana-401913957",
+      "tipo": "resultado",
+      "titulo": "Vasco da Gama vs Boca Juniors",
+      "fecha": "2026-10-20T23:41:39-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DevW9-RjFcV/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 1
+      },
+      "actualizado": "2026-10-21T04:57:25.984069-03:00"
+    },
+    "18132612151670917": {
+      "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241254/flick-octubre-no-ganan-titulos-champions-decidira-junio.html",
+      "tipo": "noticia",
+      "titulo": "Flick: \"En octubre no se ganan los títulos, la Champions se decidirá en junio\"",
+      "fecha": "2026-10-20T20:24:11-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DevAYHPAIgd/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 18,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:26.329220-03:00"
+    },
+    "18002813709001971": {
+      "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241245/barca-cae-goleado-4-2-paris-campeon-partido-loco.html",
+      "tipo": "noticia",
+      "titulo": "4-2: El Barça cae goleado ante el campeón en un partido loco",
+      "fecha": "2026-10-20T19:23:46-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Deu5dFhEUOn/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 5,
+        "views": 12,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:26.683608-03:00"
+    },
+    "18119374160077569": {
+      "key": "preview:conmebol.sudamericana-401913957",
+      "tipo": "previa",
+      "titulo": "Previa Vasco da Gama vs Boca Juniors",
+      "fecha": "2026-10-20T19:07:33-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/Deu3mZlARmQ/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:27.039744-03:00"
+    },
+    "18145314589599966": {
+      "key": "match:uefa.champions-401915397",
+      "tipo": "resultado",
+      "titulo": "Liverpool vs Villarreal",
+      "fecha": "2026-10-20T18:23:32-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Deuyj92m00b/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 9,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:27.356756-03:00"
+    },
+    "18118430330320443": {
+      "key": "match:uefa.champions-401915399",
+      "tipo": "resultado",
+      "titulo": "Paris Saint-Germain vs Barcelona",
+      "fecha": "2026-10-20T18:23:00-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Deuyf96G-So/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 12,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 1
+      },
+      "actualizado": "2026-10-21T04:57:27.704223-03:00"
+    },
+    "18141167557612851": {
+      "key": "match:uefa.champions-401915404",
+      "tipo": "resultado",
+      "titulo": "Sabah FK vs Borussia Dortmund",
+      "fecha": "2026-10-20T17:08:38-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Deup_L0GGx4/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 11,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:29.685638-03:00"
+    },
+    "18034920941895843": {
+      "key": "intro",
+      "tipo": "presentacion",
+      "titulo": "Presentación de la cuenta",
+      "fecha": "2026-10-20T15:59:59-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DeuiIrfFJFN/",
+      "metricas": {
+        "likes": 2,
+        "comments": 0,
+        "reach": 4,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 2,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-21T04:57:29.959200-03:00"
+    },
+    "18056859803576926": {
+      "key": "preview:uefa.champions-401915399",
+      "tipo": "previa",
+      "titulo": "Previa Paris Saint-Germain vs Barcelona",
+      "fecha": "2026-10-20T15:51:32-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DeuhLfnlEFe/",
+      "metricas": {
+        "likes": 3,
+        "comments": 0,
+        "reach": 3,
+        "views": 16,
+        "saved": 0,
+        "shares": 3,
+        "total_interactions": 6,
+        "follows": 0,
+        "profile_visits": 4
+      },
+      "actualizado": "2026-10-21T04:57:30.328111-03:00"
+    }
+  }
+}
