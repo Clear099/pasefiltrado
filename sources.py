@@ -299,3 +299,37 @@ def match_stats(m: dict) -> dict:
                     pass
         out[side] = vals
     return out if len(out) == 2 and out["home"] and out["away"] else {}
+
+
+ROUNDS = {"final": "Final", "semifinals": "Semifinal", "quarterfinals": "Cuartos de final",
+          "round of 16": "Octavos de final", "knockout round playoffs": "Playoffs", "playoffs": "Playoffs",
+          "round of 32": "Dieciseisavos de final"}
+NEXT = {"Semifinal": "la final", "Cuartos de final": "semifinales", "Octavos de final": "cuartos de final",
+        "Playoffs": "octavos de final", "Dieciseisavos de final": "octavos de final"}
+
+
+def match_series(m: dict) -> dict | None:
+    """Eliminatoria a ida y vuelta: ronda, partido (ida/vuelta), global y quién avanza. None si no es eliminatoria."""
+    event_id = m["id"].split("-", 1)[1]
+    try:
+        s = requests.get(SUMMARY.format(league=m["league"]), params={"event": event_id}, headers=UA, timeout=20).json()
+    except (requests.RequestException, ValueError) as e:
+        print(f"[espn] serie {m['id']}: {e}")
+        return None
+    comp = (s.get("header", {}).get("competitions") or [{}])[0]
+    series = (comp.get("series") or [None])[0]
+    if not series or series.get("totalCompetitions", 1) < 2:
+        return None
+    agg = {c["id"]: int(c.get("aggregateScore") or 0) for c in series.get("competitors", [])}
+    if m["home"]["id"] not in agg or m["away"]["id"] not in agg:
+        return None
+    winner = next((c["id"] for c in series["competitors"] if c.get("winner")), None)
+    notes = " ".join(n.get("headline", "") for n in comp.get("notes", [])).lower()
+    rnd = ROUNDS.get(series.get("title", "").lower(), series.get("title", ""))
+    side = {m["home"]["id"]: "home", m["away"]["id"]: "away"}
+    return {
+        "ronda": rnd, "siguiente": NEXT.get(rnd), "partido": series.get("leg") or comp.get("leg", {}).get("value"),
+        "total": series["totalCompetitions"], "global": {"home": agg[m["home"]["id"]], "away": agg[m["away"]["id"]]},
+        "terminada": bool(series.get("completed")) and winner is not None,
+        "avanza": side.get(winner), "penales": "penalt" in notes,
+    }

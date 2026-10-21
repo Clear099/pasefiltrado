@@ -245,13 +245,19 @@ def result_post(m: dict, out_dir: Path) -> dict:
     h, a = m["home"], m["away"]
     st = relato.story(m, lambda team: sources.is_big_team(team, CFG["big_teams"], m["league"]))
     stats = sources.match_stats(m)
-    head = relato.headline(m, st, stats)
+    serie = sources.match_series(m)
+    head = relato.headline(m, st, stats, serie)
+    ko_note = relato.series_note(m, serie)
     base = f"final-{slug(h['name'])}-{slug(a['name'])}"
     photo = None
     if st["protagonista"]:
         player, team = st["protagonista"]
         photo = photos.find_player_photo(player, team, m["kickoff"].year - 1)
-    post = {"category": "RESULTADO FINAL", "kicker": head["etiqueta"], "competition": m["competition"],
+    competition = m["competition"]
+    if serie:  # en la portada: "COPA SUDAMERICANA · SEMIFINAL · GLOBAL 2-3"
+        g = serie["global"]
+        competition += f" · {serie['ronda']}" + (f" · global {g['home']}-{g['away']}" if serie["partido"] == serie["total"] else " · ida")
+    post = {"category": "RESULTADO FINAL", "kicker": head["etiqueta"], "competition": competition,
             "headline": head["titular"], "highlight": head["destacar"], "date": m["kickoff"].date()}
     venue_photo = stadium(m.get("venue"), m.get("venue_city"))
     render.set_background(venue_photo)
@@ -269,10 +275,13 @@ def result_post(m: dict, out_dir: Path) -> dict:
 
     if head.get("caption"):
         body = head["caption"]
+        if ko_note and "global" not in body.lower() and "vuelta" not in body.lower():
+            body += f"\n\n{ko_note}"
     else:
         goals = "\n".join(f"⚽ {g['minute']} {g['player']}" for g in st["linea"])
         body = (f"{head['titular']} 🔥\n\nFINAL | {h['full_name']} {h['score']}-{a['score']} {a['full_name']}\n"
-                f"🏆 {m['competition']}\n\n{goals}\n\n¿Quién fue la figura del partido? 👇")
+                f"🏆 {m['competition']}" + (f" · {serie['ronda']}" if serie else "")
+                + (f"\n{ko_note}" if ko_note else "") + f"\n\n{goals}\n\n¿Quién fue la figura del partido? 👇")
     caption = build_caption(body + "\n\nDesliza para ver cómo fue 👉" if len(paths) > 1 else body,
                             [h["full_name"], a["full_name"], m["competition"]], "ESPN", bg_credit=not cover_photo)
     if cover_photo:

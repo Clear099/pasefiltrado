@@ -104,8 +104,47 @@ KICKERS = {"remontada": "REMONTADA", "agonico": "AGÓNICO", "batacazo": "BATACAZ
            "goleada": "GOLEADA", "hat_trick": "HAT-TRICK", "doblete": "DOBLETE", "valla_invicta": "RESULTADO FINAL"}
 
 
-def template(m: dict, st: dict) -> dict:
+def series_note(m: dict, serie: dict | None) -> str | None:
+    """Línea de la eliminatoria para el caption: global y quién avanza (o qué queda para la vuelta)."""
+    if not serie:
+        return None
+    h, a = m["home"], m["away"]
+    g = serie["global"]
+    if serie["terminada"]:
+        adv = (h if serie["avanza"] == "home" else a)["name"]
+        dest = f"es campeón 🏆" if serie["ronda"] == "Final" else f"avanza a {serie['siguiente'] or 'la siguiente ronda'}"
+        how = " por penales" if serie["penales"] else ""
+        return f"🔁 Global: {h['name']} {g['home']}-{g['away']} {a['name']} · {adv} {dest}{how}"
+    if serie["partido"] == 1:
+        return f"🔁 {serie['ronda']}, ida. Todo se define en la vuelta"
+    return f"🔁 Global: {h['name']} {g['home']}-{g['away']} {a['name']}"
+
+
+def series_headline(m: dict, serie: dict | None) -> dict | None:
+    """Si el partido cerró una eliminatoria, eso es la noticia: quién avanza o quién es campeón."""
+    if not serie or not serie["terminada"]:
+        return None
+    h, a = m["home"], m["away"]
+    win, lose = (h, a) if serie["avanza"] == "home" else (a, h)
+    g = serie["global"]
+    gl = f"{max(g.values())}-{min(g.values())}"
+    if serie["ronda"] == "Final":
+        return {"etiqueta": "¡CAMPEÓN!", "titular": f"{win['name']} es campeón de la {m['competition']}",
+                "destacar": [win["name"]]}
+    dest = serie["siguiente"] or "la siguiente ronda"
+    label = {"la final": "A LA FINAL", "semifinales": "A SEMIFINALES", "cuartos de final": "A CUARTOS",
+             "octavos de final": "A OCTAVOS"}.get(dest, "CLASIFICADO")
+    how = "por penales" if serie["penales"] else f"({gl} global)"
+    verb = "jugará" if dest == "la final" else "avanza a"
+    return {"etiqueta": label, "titular": f"{win['name']} elimina a {lose['name']} {how} y {verb} {dest}",
+            "destacar": [win["name"]]}
+
+
+def template(m: dict, st: dict, serie: dict | None = None) -> dict:
     """Titular de respaldo (sin Claude), contando el hecho más llamativo."""
+    ko = series_headline(m, serie)
+    if ko:
+        return ko
     h, a = m["home"], m["away"]
     hs, as_ = int(h["score"]), int(a["score"])
     win, lose = st["ganador"], st["perdedor"]
@@ -143,6 +182,8 @@ Latinoamérica y España. Escribes la portada de un resultado: tiene que enganch
 - "destacar" son 1 o 2 palabras del titular que irán en rojo (el protagonista o el equipo).
 - El caption: primera línea con gancho, luego 2 a 4 líneas con lo que pasó (goles clave, minutos, datos),
   y una pregunta concreta para comentar. Máximo 2 emojis. Sin hashtags.
+- Si hay "eliminatoria" y está terminada, la noticia es quién avanza (o quién es campeón): la etiqueta y el
+  titular lo dicen ("A LA FINAL", "¡CAMPEÓN!") y el caption menciona el global. Si es la ida, di que falta la vuelta.
 - Usa SOLO los datos entregados. No inventes nada."""
 
 SCHEMA = {
@@ -158,9 +199,9 @@ SCHEMA = {
 }
 
 
-def headline(m: dict, st: dict, stats: dict | None) -> dict:
+def headline(m: dict, st: dict, stats: dict | None, serie: dict | None = None) -> dict:
     """Etiqueta, titular, palabras a destacar y caption. Usa Claude si hay clave; si no, la plantilla."""
-    base = template(m, st)
+    base = template(m, st, serie)
     if not ia.allowed("resultados"):
         return {**base, "caption": None}
     h, a = m["home"], m["away"]
@@ -171,6 +212,13 @@ def headline(m: dict, st: dict, stats: dict | None) -> dict:
                    else a["full_name"], "marcador_tras_el_gol": t["score"]} for t in st["linea"]],
         "hechos_destacados": st["hechos"], "estadisticas": stats or {},
     }
+    if serie:
+        g = serie["global"]
+        facts["eliminatoria"] = {
+            "ronda": serie["ronda"], "partido": "vuelta" if serie["partido"] == serie["total"] else "ida",
+            "global": f"{h['full_name']} {g['home']}-{g['away']} {a['full_name']}",
+            "avanza": (h if serie["avanza"] == "home" else a)["full_name"] if serie["terminada"] else None,
+            "siguiente_ronda": serie["siguiente"], "por_penales": serie["penales"]}
     out = ia.ask_json("resultados", SYSTEM, "Datos del partido:\n" + json.dumps(facts, ensure_ascii=False, indent=1),
                       SCHEMA, effort="low", max_tokens=4000)
     if not out or not out.get("titular"):
