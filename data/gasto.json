@@ -1,11 +1,11 @@
 {
   "2026-10": {
-    "total": 0.4377,
-    "llamadas": 14,
+    "total": 0.4499,
+    "llamadas": 15,
     "por_tarea": {
       "noticias": 0.0628,
       "ultima_hora": 0.3402,
-      "resultados": 0.0347
+      "resultados": 0.0469
     }
   }
 }
