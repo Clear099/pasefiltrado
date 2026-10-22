@@ -3,6 +3,10 @@
     {
       "fecha": "2026-10-21",
       "valor": 5
+    },
+    {
+      "fecha": "2026-10-22",
+      "valor": 5
     }
   ],
   "posts": {
@@ -14,15 +18,15 @@
       "formato": "VIDEO",
       "permalink": "https://www.instagram.com/reel/DevXAfwjIy-/",
       "metricas": {
-        "likes": 1,
+        "likes": 2,
         "comments": 0,
-        "reach": 37,
-        "views": 58,
+        "reach": 63,
+        "views": 88,
         "saved": 0,
         "shares": 0,
-        "total_interactions": 1
+        "total_interactions": 2
       },
-      "actualizado": "2026-10-21T04:57:25.693614-03:00"
+      "actualizado": "2026-10-22T04:54:31.330107-03:00"
     },
     "18027386834860333": {
       "key": "match:conmebol.sudamericana-401913957",
@@ -34,15 +38,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 3,
-        "views": 14,
+        "reach": 6,
+        "views": 23,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-21T04:57:25.984069-03:00"
+      "actualizado": "2026-10-22T04:54:31.704196-03:00"
     },
     "18132612151670917": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241254/flick-octubre-no-ganan-titulos-champions-decidira-junio.html",
@@ -54,15 +58,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 4,
-        "views": 18,
+        "reach": 5,
+        "views": 20,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:26.329220-03:00"
+      "actualizado": "2026-10-22T04:54:32.095465-03:00"
     },
     "18002813709001971": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241245/barca-cae-goleado-4-2-paris-campeon-partido-loco.html",
@@ -74,15 +78,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 5,
-        "views": 12,
+        "reach": 6,
+        "views": 14,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:26.683608-03:00"
+      "actualizado": "2026-10-22T04:54:32.449650-03:00"
     },
     "18119374160077569": {
       "key": "preview:conmebol.sudamericana-401913957",
@@ -94,15 +98,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 3,
-        "views": 14,
+        "reach": 4,
+        "views": 15,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:27.039744-03:00"
+      "actualizado": "2026-10-22T04:54:32.906053-03:00"
     },
     "18145314589599966": {
       "key": "match:uefa.champions-401915397",
@@ -114,15 +118,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 3,
-        "views": 9,
+        "reach": 4,
+        "views": 11,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:27.356756-03:00"
+      "actualizado": "2026-10-22T04:54:33.300158-03:00"
     },
     "18118430330320443": {
       "key": "match:uefa.champions-401915399",
@@ -142,7 +146,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-21T04:57:27.704223-03:00"
+      "actualizado": "2026-10-22T04:54:33.670069-03:00"
     },
     "18141167557612851": {
       "key": "match:uefa.champions-401915404",
@@ -154,15 +158,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 3,
-        "views": 11,
+        "reach": 4,
+        "views": 12,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:29.685638-03:00"
+      "actualizado": "2026-10-22T04:54:34.045702-03:00"
     },
     "18034920941895843": {
       "key": "intro",
@@ -174,15 +178,15 @@
       "metricas": {
         "likes": 2,
         "comments": 0,
-        "reach": 4,
-        "views": 14,
+        "reach": 5,
+        "views": 24,
         "saved": 0,
         "shares": 0,
         "total_interactions": 2,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-21T04:57:29.959200-03:00"
+      "actualizado": "2026-10-22T04:54:34.366139-03:00"
     },
     "18056859803576926": {
       "key": "preview:uefa.champions-401915399",
@@ -194,15 +198,249 @@
       "metricas": {
         "likes": 3,
         "comments": 0,
-        "reach": 3,
-        "views": 16,
+        "reach": 4,
+        "views": 17,
         "saved": 0,
         "shares": 3,
         "total_interactions": 6,
         "follows": 0,
         "profile_visits": 4
       },
-      "actualizado": "2026-10-21T04:57:30.328111-03:00"
+      "actualizado": "2026-10-22T04:54:34.769446-03:00"
+    },
+    "18149768023522284": {
+      "key": "",
+      "tipo": "manual",
+      "titulo": "El Arsenal se negó a perder en Múnich 🔥\nEberechi Eze abrió el marcador al 25' y ",
+      "fecha": "2026-10-21T18:03:55-03:00",
+      "formato": "VIDEO",
+      "permalink": "https://www.instagram.com/reel/DexVFPHiVdO/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 46,
+        "views": 52,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0
+      },
+      "actualizado": "2026-10-22T04:54:22.075851-03:00"
+    },
+    "18141790462616169": {
+      "key": "match:uefa.champions-401915312",
+      "tipo": "resultado",
+      "titulo": "Bayern Munich vs Arsenal",
+      "fecha": "2026-10-21T18:03:01-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DexVAbjCWbU/",
+      "metricas": {
+        "likes": 1,
+        "comments": 0,
+        "reach": 4,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 1,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:22.585590-03:00"
+    },
+    "18119320901321045": {
+      "key": "",
+      "tipo": "manual",
+      "titulo": "¡Dos goles en dos minutos y el Levante dio el golpe! 🔥\nRoger Brugué marcó al 20'",
+      "fecha": "2026-10-21T17:18:11-03:00",
+      "formato": "VIDEO",
+      "permalink": "https://www.instagram.com/reel/DexP2Sij5GR/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 12,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0
+      },
+      "actualizado": "2026-10-22T04:54:24.697063-03:00"
+    },
+    "17897706144411077": {
+      "key": "match:esp.1-401882870",
+      "tipo": "resultado",
+      "titulo": "Levante vs Athletic Club",
+      "fecha": "2026-10-21T17:17:27-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DexPzS5gfa8/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 9,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:25.028761-03:00"
+    },
+    "17910080835487678": {
+      "key": "news:https://news.google.com/rss/articles/CBMif0FVX3lxTE16T1RRTnRJYWVjU2w0ZnRNcC1sQzJDWnhhTjFpc0ZUTFFBQVNaWkxzQkY1S1BDejZWVm43WFpCM3RfeGRFVW5UbFdoTFhqOU1VQ1RGN0FwLWZQWnRYQWxVc3BBVXVhYklmLUx4SlRyT0pOWG9iVF9BanRFSEFFVzA?oc=5",
+      "tipo": "noticia",
+      "titulo": "¿Por qué no juega Luis Díaz en Bayern Múnich vs Arsenal? La sorpresiva decisión de Kompany en Champions League",
+      "fecha": "2026-10-21T16:01:20-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DexHFMjHfYb/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 12,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 1
+      },
+      "actualizado": "2026-10-22T04:54:25.374717-03:00"
+    },
+    "17903378655370713": {
+      "key": "",
+      "tipo": "manual",
+      "titulo": "¡El Como pasó por encima del Manchester United en el Sinigaglia! 🔥\nNico Paz abri",
+      "fecha": "2026-10-21T15:47:31-03:00",
+      "formato": "VIDEO",
+      "permalink": "https://www.instagram.com/reel/DexFeFEkzXK/",
+      "metricas": {
+        "likes": 2,
+        "comments": 0,
+        "reach": 4,
+        "views": 10,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 2
+      },
+      "actualizado": "2026-10-22T04:54:27.248869-03:00"
+    },
+    "18110874584463474": {
+      "key": "match:uefa.champions-401915395",
+      "tipo": "resultado",
+      "titulo": "Como vs Manchester United",
+      "fecha": "2026-10-21T15:46:40-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/DexFZ64j8Z9/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 13,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:27.635469-03:00"
+    },
+    "17964130701215124": {
+      "key": "news:https://news.google.com/rss/articles/CBMie0FVX3lxTFBCclFFU0FHU1BsZFQyT0QxZzY1SXlTb0NOZTNYUDJPVWZNMklNV0dkX0xMNUg3YW1SSHk0MmRFU3h2LUktUmZwd0xwSkl5MXZNM3FlN3VoeWplXzBiQ19Gdlo1Q1c2bmxXZGxsbm84YXRiRG9BTlYyX3R4RQ?oc=5",
+      "tipo": "noticia",
+      "titulo": "Gol de Nico Paz vs Manchester United: así fue su golazo en Champions",
+      "fecha": "2026-10-21T14:00:13-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dew5OKQmrCI/",
+      "metricas": {
+        "likes": 2,
+        "comments": 0,
+        "reach": 5,
+        "views": 27,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 2,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:28.069284-03:00"
+    },
+    "17919965607445214": {
+      "key": "news:https://www.mundodeportivo.com/futbol/internacional/20261021/1004241548/marco-asensio.html",
+      "tipo": "noticia",
+      "titulo": "Marco Asensio pasa por el quirófano",
+      "fecha": "2026-10-21T13:43:59-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dew3XKJoFtR/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 18,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:28.413597-03:00"
+    },
+    "18343852552249926": {
+      "key": "news:https://www.bbc.co.uk/sport/football/articles/cm4g1jwp9827o?at_medium=RSS&at_campaign=rss",
+      "tipo": "noticia",
+      "titulo": "Barca condemn PSG tifo inciting 'violence and hatred'",
+      "fecha": "2026-10-21T11:18:22-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DewmsvgkWOB/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 6,
+        "views": 20,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:28.799426-03:00"
+    },
+    "18143190157589613": {
+      "key": "news:https://news.google.com/rss/articles/CBMipwFBVV95cUxNTmxrclRWT3oyMEJhWFI1U2drQWpBWUZpdU0wQXdBY1J6WVRfOTlMNHNySUFHT1JybDhhYUZnemJlYU9qc2puT1BVTGx2R19iQklOOElLMDI1OVk0dWpBdTBNc1J2NmgwZlJBLXNoUkNlU2w0TWgyNFZGRzl2NW5OVGxfaWZ1NmQydTk5am04cTRid0VBOTl6anRWYkkyNGRKOWtHWHBZQdIBtAFBVV95cUxOcGJueDJQTGNOZnc1VExSVl9oVzJvMXI3OERRQ0VGYWtJc0VEZ01rYnFTcXFocEF4UnV1VXRYd05mdjdyN3k2djNEa2lMQUZLRGg0THdfYnQwMjFrUjQtM0F4SktqdTJIa3U5LVhqcGtqM1JzWHk1LUdLVTRuU2hONEt2RFB0c2hlWmFuYTBDU1VMcU9OUi10STFkOWhSbl8wbjFhTjVLYVI1YXJ2dU1QdHlRMko?oc=5",
+      "tipo": "noticia",
+      "titulo": "Dani Olmo, descartado para el Clásico, de cuatro a seis semanas de baja",
+      "fecha": "2026-10-21T10:18:44-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dewf3zHHKQx/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 17,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:29.087582-03:00"
+    },
+    "18016722392958149": {
+      "key": "news:https://www.bbc.co.uk/sport/football/articles/cxnv0ed5pz23o?at_medium=RSS&at_campaign=rss",
+      "tipo": "noticia",
+      "titulo": "PSG's Kvaratskhelia to have surgery on ruptured ACL",
+      "fecha": "2026-10-21T09:17:08-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DewY0-JFNal/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 6,
+        "views": 21,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-22T04:54:29.576689-03:00"
     }
   }
 }
