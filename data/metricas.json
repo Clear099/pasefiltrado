@@ -7,6 +7,10 @@
     {
       "fecha": "2026-10-22",
       "valor": 5
+    },
+    {
+      "fecha": "2026-10-23",
+      "valor": 5
     }
   ],
   "posts": {
@@ -26,7 +30,7 @@
         "shares": 0,
         "total_interactions": 2
       },
-      "actualizado": "2026-10-22T04:54:31.330107-03:00"
+      "actualizado": "2026-10-23T04:53:35.063442-03:00"
     },
     "18027386834860333": {
       "key": "match:conmebol.sudamericana-401913957",
@@ -46,7 +50,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-22T04:54:31.704196-03:00"
+      "actualizado": "2026-10-23T04:53:35.305414-03:00"
     },
     "18132612151670917": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241254/flick-octubre-no-ganan-titulos-champions-decidira-junio.html",
@@ -66,7 +70,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:32.095465-03:00"
+      "actualizado": "2026-10-23T04:53:35.573081-03:00"
     },
     "18002813709001971": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241245/barca-cae-goleado-4-2-paris-campeon-partido-loco.html",
@@ -86,7 +90,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:32.449650-03:00"
+      "actualizado": "2026-10-23T04:53:35.897028-03:00"
     },
     "18119374160077569": {
       "key": "preview:conmebol.sudamericana-401913957",
@@ -106,7 +110,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:32.906053-03:00"
+      "actualizado": "2026-10-23T04:53:36.160658-03:00"
     },
     "18145314589599966": {
       "key": "match:uefa.champions-401915397",
@@ -126,7 +130,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:33.300158-03:00"
+      "actualizado": "2026-10-23T04:53:36.376516-03:00"
     },
     "18118430330320443": {
       "key": "match:uefa.champions-401915399",
@@ -146,7 +150,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-22T04:54:33.670069-03:00"
+      "actualizado": "2026-10-23T04:53:36.691102-03:00"
     },
     "18141167557612851": {
       "key": "match:uefa.champions-401915404",
@@ -166,7 +170,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:34.045702-03:00"
+      "actualizado": "2026-10-23T04:53:36.911480-03:00"
     },
     "18034920941895843": {
       "key": "intro",
@@ -179,14 +183,14 @@
         "likes": 2,
         "comments": 0,
         "reach": 5,
-        "views": 24,
+        "views": 28,
         "saved": 0,
         "shares": 0,
         "total_interactions": 2,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:34.366139-03:00"
+      "actualizado": "2026-10-23T04:53:37.185464-03:00"
     },
     "18056859803576926": {
       "key": "preview:uefa.champions-401915399",
@@ -206,7 +210,7 @@
         "follows": 0,
         "profile_visits": 4
       },
-      "actualizado": "2026-10-22T04:54:34.769446-03:00"
+      "actualizado": "2026-10-23T04:53:37.579786-03:00"
     },
     "18149768023522284": {
       "key": "",
@@ -224,7 +228,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "actualizado": "2026-10-22T04:54:22.075851-03:00"
+      "actualizado": "2026-10-23T04:53:29.344296-03:00"
     },
     "18141790462616169": {
       "key": "match:uefa.champions-401915312",
@@ -237,14 +241,14 @@
         "likes": 1,
         "comments": 0,
         "reach": 4,
-        "views": 14,
+        "views": 18,
         "saved": 0,
         "shares": 0,
         "total_interactions": 1,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:22.585590-03:00"
+      "actualizado": "2026-10-23T04:53:29.639796-03:00"
     },
     "18119320901321045": {
       "key": "",
@@ -256,13 +260,13 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 12,
-        "views": 14,
+        "reach": 19,
+        "views": 21,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "actualizado": "2026-10-22T04:54:24.697063-03:00"
+      "actualizado": "2026-10-23T04:53:30.785985-03:00"
     },
     "17897706144411077": {
       "key": "match:esp.1-401882870",
@@ -275,14 +279,14 @@
         "likes": 0,
         "comments": 0,
         "reach": 3,
-        "views": 9,
+        "views": 13,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:25.028761-03:00"
+      "actualizado": "2026-10-23T04:53:31.037256-03:00"
     },
     "17910080835487678": {
       "key": "news:https://news.google.com/rss/articles/CBMif0FVX3lxTE16T1RRTnRJYWVjU2w0ZnRNcC1sQzJDWnhhTjFpc0ZUTFFBQVNaWkxzQkY1S1BDejZWVm43WFpCM3RfeGRFVW5UbFdoTFhqOU1VQ1RGN0FwLWZQWnRYQWxVc3BBVXVhYklmLUx4SlRyT0pOWG9iVF9BanRFSEFFVzA?oc=5",
@@ -295,14 +299,14 @@
         "likes": 0,
         "comments": 0,
         "reach": 4,
-        "views": 12,
+        "views": 18,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-22T04:54:25.374717-03:00"
+      "actualizado": "2026-10-23T04:53:31.267019-03:00"
     },
     "17903378655370713": {
       "key": "",
@@ -314,13 +318,13 @@
       "metricas": {
         "likes": 2,
         "comments": 0,
-        "reach": 4,
-        "views": 10,
+        "reach": 73,
+        "views": 86,
         "saved": 0,
         "shares": 0,
         "total_interactions": 2
       },
-      "actualizado": "2026-10-22T04:54:27.248869-03:00"
+      "actualizado": "2026-10-23T04:53:32.328705-03:00"
     },
     "18110874584463474": {
       "key": "match:uefa.champions-401915395",
@@ -333,14 +337,14 @@
         "likes": 0,
         "comments": 0,
         "reach": 4,
-        "views": 13,
+        "views": 14,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:27.635469-03:00"
+      "actualizado": "2026-10-23T04:53:32.630475-03:00"
     },
     "17964130701215124": {
       "key": "news:https://news.google.com/rss/articles/CBMie0FVX3lxTFBCclFFU0FHU1BsZFQyT0QxZzY1SXlTb0NOZTNYUDJPVWZNMklNV0dkX0xMNUg3YW1SSHk0MmRFU3h2LUktUmZwd0xwSkl5MXZNM3FlN3VoeWplXzBiQ19Gdlo1Q1c2bmxXZGxsbm84YXRiRG9BTlYyX3R4RQ?oc=5",
@@ -360,7 +364,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:28.069284-03:00"
+      "actualizado": "2026-10-23T04:53:32.964315-03:00"
     },
     "17919965607445214": {
       "key": "news:https://www.mundodeportivo.com/futbol/internacional/20261021/1004241548/marco-asensio.html",
@@ -380,7 +384,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:28.413597-03:00"
+      "actualizado": "2026-10-23T04:53:33.255695-03:00"
     },
     "18343852552249926": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/cm4g1jwp9827o?at_medium=RSS&at_campaign=rss",
@@ -400,7 +404,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:28.799426-03:00"
+      "actualizado": "2026-10-23T04:53:33.474342-03:00"
     },
     "18143190157589613": {
       "key": "news:https://news.google.com/rss/articles/CBMipwFBVV95cUxNTmxrclRWT3oyMEJhWFI1U2drQWpBWUZpdU0wQXdBY1J6WVRfOTlMNHNySUFHT1JybDhhYUZnemJlYU9qc2puT1BVTGx2R19iQklOOElLMDI1OVk0dWpBdTBNc1J2NmgwZlJBLXNoUkNlU2w0TWgyNFZGRzl2NW5OVGxfaWZ1NmQydTk5am04cTRid0VBOTl6anRWYkkyNGRKOWtHWHBZQdIBtAFBVV95cUxOcGJueDJQTGNOZnc1VExSVl9oVzJvMXI3OERRQ0VGYWtJc0VEZ01rYnFTcXFocEF4UnV1VXRYd05mdjdyN3k2djNEa2lMQUZLRGg0THdfYnQwMjFrUjQtM0F4SktqdTJIa3U5LVhqcGtqM1JzWHk1LUdLVTRuU2hONEt2RFB0c2hlWmFuYTBDU1VMcU9OUi10STFkOWhSbl8wbjFhTjVLYVI1YXJ2dU1QdHlRMko?oc=5",
@@ -420,7 +424,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:29.087582-03:00"
+      "actualizado": "2026-10-23T04:53:33.764720-03:00"
     },
     "18016722392958149": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/cxnv0ed5pz23o?at_medium=RSS&at_campaign=rss",
@@ -433,14 +437,212 @@
         "likes": 0,
         "comments": 0,
         "reach": 6,
-        "views": 21,
+        "views": 22,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-22T04:54:29.576689-03:00"
+      "actualizado": "2026-10-23T04:53:34.077484-03:00"
+    },
+    "18114226526027696": {
+      "key": "",
+      "tipo": "manual",
+      "titulo": "El Pincha resistió con diez y silenció al Maracaná 🔥\nSemifinal de vuelta de Copa",
+      "fecha": "2026-10-22T23:53:38-03:00",
+      "formato": "VIDEO",
+      "permalink": "https://www.instagram.com/reel/De0h5jQkrK9/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 13,
+        "views": 17,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0
+      },
+      "actualizado": "2026-10-23T04:53:25.674747-03:00"
+    },
+    "18096873107389570": {
+      "key": "match:conmebol.libertadores-401912521",
+      "tipo": "resultado",
+      "titulo": "Flamengo vs Estudiantes de La Plata",
+      "fecha": "2026-10-22T23:52:52-03:00",
+      "formato": "CAROUSEL_ALBUM",
+      "permalink": "https://www.instagram.com/p/De0h1t9ETF-/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 2,
+        "views": 9,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:25.974457-03:00"
+    },
+    "18111679445268552": {
+      "key": "news:https://www.bbc.co.uk/sport/football/articles/c6z981p24q1eo?at_medium=RSS&at_campaign=rss",
+      "tipo": "noticia",
+      "titulo": "Dream night for Bournemouth - win over Milan a sign of Premier League power",
+      "fecha": "2026-10-22T18:34:27-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dez9ZeFm33r/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 1,
+        "views": 4,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:26.212639-03:00"
+    },
+    "18107946494187022": {
+      "key": "news:https://www.mundodeportivo.com/futbol/real-sociedad/20261022/1004242053/real-impone-pegada-mejor-nivel-poderio-arrasar-lillestrom.html",
+      "tipo": "noticia",
+      "titulo": "0-6: La Real impone su pegada, mejor nivel y poderío para arrasar al Lillestrom",
+      "fecha": "2026-10-22T18:04:18-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dez58pXjwcf/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 2,
+        "views": 5,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:26.503409-03:00"
+    },
+    "17962459695238506": {
+      "key": "news:https://www.mundodeportivo.com/futbol/getafe/20261022/1004242040/bordalas-me-siento-enganado-no-cumplido-prometido.html",
+      "tipo": "noticia",
+      "titulo": "Bordalás: \"Me siento engañado porque no se ha cumplido lo que se ha prometido\"",
+      "fecha": "2026-10-22T17:33:53-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/Dez2d0xD1Qi/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 0,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:26.822824-03:00"
+    },
+    "18125297410910784": {
+      "key": "news:https://www.mundodeportivo.com/futbol/real-madrid/20261022/1004241960/record-real-madrid-champions.html",
+      "tipo": "noticia",
+      "titulo": "Récord del Real Madrid en Champions",
+      "fecha": "2026-10-22T16:33:13-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DezvhktIFvj/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 1,
+        "views": 4,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:27.174475-03:00"
+    },
+    "17920997265241278": {
+      "key": "agenda:2026-10-22",
+      "tipo": "agenda",
+      "titulo": "Agenda 2026-10-22",
+      "fecha": "2026-10-22T14:00:11-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DezeAnEIPK5/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 2,
+        "views": 9,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:27.417053-03:00"
+    },
+    "17911927734481086": {
+      "key": "news:https://www.bbc.co.uk/sport/football/articles/cqe8rglz8p90o?at_medium=RSS&at_campaign=rss",
+      "tipo": "noticia",
+      "titulo": "Fernandes to remain Man Utd captain despite outburst",
+      "fecha": "2026-10-22T13:38:02-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DezbfJKFXKW/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 13,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 1
+      },
+      "actualizado": "2026-10-23T04:53:27.667376-03:00"
+    },
+    "18109245578580860": {
+      "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261022/1004241958/leo-recuerda-padre-importancia-recoger-galardon.html",
+      "tipo": "noticia",
+      "titulo": "Leo recuerda a su padre y su importancia antes de recoger el galardón",
+      "fecha": "2026-10-22T13:07:50-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DezYBgvFFJh/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:27.986306-03:00"
+    },
+    "18103067855148047": {
+      "key": "news:https://news.google.com/rss/articles/CBMivwFBVV95cUxOczF0R0k2OHBzcXN0Q015Z0w0akRKUEFyeFV0aWQyM254QXlzQzc3TENTa1ZqV3p3UmF3clFlYmZIRjVVTTg2a3BWRG9RTEF3cFJNMVdRNnJlYjFuSDgtQVAtb0ktbnZTckl6WXZOZTZHaDkza0hVaV9Zd0h2aHlGV056QWYzZ2pWOFVWWW5vbVVVcUNCeS1ocVRLeU5EdS1aSnBwc0RPOURZVzhCQlFnUjVjS0Q5bjFHMVBhY2diRdIBvwFBVV95cUxOczF0R0k2OHBzcXN0Q015Z0w0akRKUEFyeFV0aWQyM254QXlzQzc3TENTa1ZqV3p3UmF3clFlYmZIRjVVTTg2a3BWRG9RTEF3cFJNMVdRNnJlYjFuSDgtQVAtb0ktbnZTckl6WXZOZTZHaDkza0hVaV9Zd0h2aHlGV056QWYzZ2pWOFVWWW5vbVVVcUNCeS1ocVRLeU5EdS1aSnBwc0RPOURZVzhCQlFnUjVjS0Q5bjFHMVBhY2diRQ?oc=5",
+      "tipo": "noticia",
+      "titulo": "El Bayern comunica el parte médico de Luis Díaz",
+      "fecha": "2026-10-22T12:37:31-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/DezUjFhG5u6/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 14,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-23T04:53:28.289580-03:00"
     }
   }
 }
