@@ -1,18 +1,5 @@
 [
   {
-    "key": "match:ita.1-401874948",
-    "title": "Napoli vs AS Roma",
-    "caption": "Napoli lo ganaba 2-0 y terminó sufriendo un 3-3 en el último suspiro 🤯\nAnguissa (28') y McTominay (48') pusieron arriba al Napoli en el Maradona.\nLa Roma reaccionó con Soulé (69') y Balerdi (74') para empatar en cinco minutos.\nMcTominay firmó su doblete en el 83', pero Balerdi también hizo doblete y lo igualó en el 89' ⚽\nSeis goles, 24 remates de la Roma y 11 córners contra 2 del Napoli.\n¿Qué duele más: dejar escapar un 2-0 o recibir el empate en el 89'?\n\nDesliza para ver cómo fue 👉\n\n📰 Fuente: ESPN\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #Napoli #ASRoma #SerieA\n\n📷 Foto: Krzysztof Popławski / CC BY 4.0 · Wikimedia Commons",
-    "reel": "posts/2026-10-24/final-napoli-as-roma.mp4",
-    "images": [
-      "posts/2026-10-24/final-napoli-as-roma.jpg",
-      "posts/2026-10-24/final-napoli-as-roma-2.jpg"
-    ],
-    "created": "2026-10-24T15:11:03.845624-03:00",
-    "story": "posts/2026-10-24/final-napoli-as-roma-historia.jpg",
-    "attempts": 2
-  },
-  {
     "key": "match:eng.1-401878768",
     "title": "Arsenal vs Everton",
     "caption": "El Emirates vio otra tarde sin goles en contra para el Arsenal 🔴\nEzri Konsa abrió el marcador muy temprano, al minuto 7.\nGabriel Magalhães sentenció al 68' para el 2-0 definitivo.\nDominio total: 58% de posesión, 20 remates y 12 córners contra apenas 3 del Everton.\n¿Es la defensa del Arsenal la mejor de la Premier ahora mismo?\n\nDesliza para ver cómo fue 👉\n\n📰 Fuente: ESPN\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #Arsenal #Everton #PremierLeague\n\n📷 Foto: Arne Müseler / CC BY-SA 3.0 de · Wikimedia Commons",
@@ -23,7 +10,7 @@
     ],
     "created": "2026-10-24T15:18:49.974610-03:00",
     "story": "posts/2026-10-24/final-arsenal-everton-historia.jpg",
-    "attempts": 1
+    "attempts": 2
   },
   {
     "key": "match:eng.1-401878767",
@@ -35,6 +22,7 @@
       "posts/2026-10-24/final-chelsea-spurs-2.jpg"
     ],
     "created": "2026-10-24T15:25:59.051596-03:00",
-    "story": "posts/2026-10-24/final-chelsea-spurs-historia.jpg"
+    "story": "posts/2026-10-24/final-chelsea-spurs-historia.jpg",
+    "attempts": 1
   }
 ]
