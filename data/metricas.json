@@ -11,6 +11,10 @@
     {
       "fecha": "2026-10-23",
       "valor": 5
+    },
+    {
+      "fecha": "2026-10-24",
+      "valor": 5
     }
   ],
   "posts": {
@@ -30,7 +34,7 @@
         "shares": 0,
         "total_interactions": 2
       },
-      "actualizado": "2026-10-23T04:53:35.063442-03:00"
+      "actualizado": "2026-10-24T04:34:26.568999-03:00"
     },
     "18027386834860333": {
       "key": "match:conmebol.sudamericana-401913957",
@@ -50,7 +54,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-23T04:53:35.305414-03:00"
+      "actualizado": "2026-10-24T04:34:26.947550-03:00"
     },
     "18132612151670917": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241254/flick-octubre-no-ganan-titulos-champions-decidira-junio.html",
@@ -70,7 +74,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:35.573081-03:00"
+      "actualizado": "2026-10-24T04:34:27.228506-03:00"
     },
     "18002813709001971": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261020/1004241245/barca-cae-goleado-4-2-paris-campeon-partido-loco.html",
@@ -90,7 +94,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:35.897028-03:00"
+      "actualizado": "2026-10-24T04:34:27.720058-03:00"
     },
     "18119374160077569": {
       "key": "preview:conmebol.sudamericana-401913957",
@@ -110,7 +114,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:36.160658-03:00"
+      "actualizado": "2026-10-24T04:34:28.063338-03:00"
     },
     "18145314589599966": {
       "key": "match:uefa.champions-401915397",
@@ -130,7 +134,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:36.376516-03:00"
+      "actualizado": "2026-10-24T04:34:28.336911-03:00"
     },
     "18118430330320443": {
       "key": "match:uefa.champions-401915399",
@@ -150,7 +154,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-23T04:53:36.691102-03:00"
+      "actualizado": "2026-10-24T04:34:28.785921-03:00"
     },
     "18141167557612851": {
       "key": "match:uefa.champions-401915404",
@@ -170,7 +174,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:36.911480-03:00"
+      "actualizado": "2026-10-24T04:34:29.081692-03:00"
     },
     "18034920941895843": {
       "key": "intro",
@@ -190,7 +194,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:37.185464-03:00"
+      "actualizado": "2026-10-24T04:34:29.361674-03:00"
     },
     "18056859803576926": {
       "key": "preview:uefa.champions-401915399",
@@ -210,7 +214,7 @@
         "follows": 0,
         "profile_visits": 4
       },
-      "actualizado": "2026-10-23T04:53:37.579786-03:00"
+      "actualizado": "2026-10-24T04:34:29.925710-03:00"
     },
     "18149768023522284": {
       "key": "",
@@ -228,7 +232,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "actualizado": "2026-10-23T04:53:29.344296-03:00"
+      "actualizado": "2026-10-24T04:34:19.068714-03:00"
     },
     "18141790462616169": {
       "key": "match:uefa.champions-401915312",
@@ -248,7 +252,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:29.639796-03:00"
+      "actualizado": "2026-10-24T04:34:19.673554-03:00"
     },
     "18119320901321045": {
       "key": "",
@@ -266,7 +270,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "actualizado": "2026-10-23T04:53:30.785985-03:00"
+      "actualizado": "2026-10-24T04:34:20.916413-03:00"
     },
     "17897706144411077": {
       "key": "match:esp.1-401882870",
@@ -286,7 +290,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:31.037256-03:00"
+      "actualizado": "2026-10-24T04:34:21.255033-03:00"
     },
     "17910080835487678": {
       "key": "news:https://news.google.com/rss/articles/CBMif0FVX3lxTE16T1RRTnRJYWVjU2w0ZnRNcC1sQzJDWnhhTjFpc0ZUTFFBQVNaWkxzQkY1S1BDejZWVm43WFpCM3RfeGRFVW5UbFdoTFhqOU1VQ1RGN0FwLWZQWnRYQWxVc3BBVXVhYklmLUx4SlRyT0pOWG9iVF9BanRFSEFFVzA?oc=5",
@@ -298,15 +302,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 4,
+        "reach": 5,
         "views": 18,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
-        "profile_visits": 1
+        "profile_visits": 2
       },
-      "actualizado": "2026-10-23T04:53:31.267019-03:00"
+      "actualizado": "2026-10-24T04:34:21.662763-03:00"
     },
     "17903378655370713": {
       "key": "",
@@ -324,7 +328,7 @@
         "shares": 0,
         "total_interactions": 2
       },
-      "actualizado": "2026-10-23T04:53:32.328705-03:00"
+      "actualizado": "2026-10-24T04:34:22.948799-03:00"
     },
     "18110874584463474": {
       "key": "match:uefa.champions-401915395",
@@ -344,7 +348,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:32.630475-03:00"
+      "actualizado": "2026-10-24T04:34:23.318929-03:00"
     },
     "17964130701215124": {
       "key": "news:https://news.google.com/rss/articles/CBMie0FVX3lxTFBCclFFU0FHU1BsZFQyT0QxZzY1SXlTb0NOZTNYUDJPVWZNMklNV0dkX0xMNUg3YW1SSHk0MmRFU3h2LUktUmZwd0xwSkl5MXZNM3FlN3VoeWplXzBiQ19Gdlo1Q1c2bmxXZGxsbm84YXRiRG9BTlYyX3R4RQ?oc=5",
@@ -364,7 +368,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:32.964315-03:00"
+      "actualizado": "2026-10-24T04:34:23.763299-03:00"
     },
     "17919965607445214": {
       "key": "news:https://www.mundodeportivo.com/futbol/internacional/20261021/1004241548/marco-asensio.html",
@@ -384,7 +388,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:33.255695-03:00"
+      "actualizado": "2026-10-24T04:34:24.068890-03:00"
     },
     "18343852552249926": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/cm4g1jwp9827o?at_medium=RSS&at_campaign=rss",
@@ -404,7 +408,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:33.474342-03:00"
+      "actualizado": "2026-10-24T04:34:24.465075-03:00"
     },
     "18143190157589613": {
       "key": "news:https://news.google.com/rss/articles/CBMipwFBVV95cUxNTmxrclRWT3oyMEJhWFI1U2drQWpBWUZpdU0wQXdBY1J6WVRfOTlMNHNySUFHT1JybDhhYUZnemJlYU9qc2puT1BVTGx2R19iQklOOElLMDI1OVk0dWpBdTBNc1J2NmgwZlJBLXNoUkNlU2w0TWgyNFZGRzl2NW5OVGxfaWZ1NmQydTk5am04cTRid0VBOTl6anRWYkkyNGRKOWtHWHBZQdIBtAFBVV95cUxOcGJueDJQTGNOZnc1VExSVl9oVzJvMXI3OERRQ0VGYWtJc0VEZ01rYnFTcXFocEF4UnV1VXRYd05mdjdyN3k2djNEa2lMQUZLRGg0THdfYnQwMjFrUjQtM0F4SktqdTJIa3U5LVhqcGtqM1JzWHk1LUdLVTRuU2hONEt2RFB0c2hlWmFuYTBDU1VMcU9OUi10STFkOWhSbl8wbjFhTjVLYVI1YXJ2dU1QdHlRMko?oc=5",
@@ -424,7 +428,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:33.764720-03:00"
+      "actualizado": "2026-10-24T04:34:24.987653-03:00"
     },
     "18016722392958149": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/cxnv0ed5pz23o?at_medium=RSS&at_campaign=rss",
@@ -444,7 +448,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:34.077484-03:00"
+      "actualizado": "2026-10-24T04:34:25.265782-03:00"
     },
     "18114226526027696": {
       "key": "",
@@ -456,13 +460,13 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 13,
-        "views": 17,
+        "reach": 19,
+        "views": 23,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "actualizado": "2026-10-23T04:53:25.674747-03:00"
+      "actualizado": "2026-10-24T04:34:13.576556-03:00"
     },
     "18096873107389570": {
       "key": "match:conmebol.libertadores-401912521",
@@ -482,7 +486,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:25.974457-03:00"
+      "actualizado": "2026-10-24T04:34:13.847765-03:00"
     },
     "18111679445268552": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/c6z981p24q1eo?at_medium=RSS&at_campaign=rss",
@@ -494,15 +498,15 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 1,
-        "views": 4,
+        "reach": 2,
+        "views": 8,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:26.212639-03:00"
+      "actualizado": "2026-10-24T04:34:15.239701-03:00"
     },
     "18107946494187022": {
       "key": "news:https://www.mundodeportivo.com/futbol/real-sociedad/20261022/1004242053/real-impone-pegada-mejor-nivel-poderio-arrasar-lillestrom.html",
@@ -522,7 +526,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:26.503409-03:00"
+      "actualizado": "2026-10-24T04:34:15.561071-03:00"
     },
     "17962459695238506": {
       "key": "news:https://www.mundodeportivo.com/futbol/getafe/20261022/1004242040/bordalas-me-siento-enganado-no-cumplido-prometido.html",
@@ -542,7 +546,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:26.822824-03:00"
+      "actualizado": "2026-10-24T04:34:15.942521-03:00"
     },
     "18125297410910784": {
       "key": "news:https://www.mundodeportivo.com/futbol/real-madrid/20261022/1004241960/record-real-madrid-champions.html",
@@ -562,7 +566,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:27.174475-03:00"
+      "actualizado": "2026-10-24T04:34:16.325517-03:00"
     },
     "17920997265241278": {
       "key": "agenda:2026-10-22",
@@ -582,7 +586,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:27.417053-03:00"
+      "actualizado": "2026-10-24T04:34:16.821865-03:00"
     },
     "17911927734481086": {
       "key": "news:https://www.bbc.co.uk/sport/football/articles/cqe8rglz8p90o?at_medium=RSS&at_campaign=rss",
@@ -602,7 +606,7 @@
         "follows": 0,
         "profile_visits": 1
       },
-      "actualizado": "2026-10-23T04:53:27.667376-03:00"
+      "actualizado": "2026-10-24T04:34:17.124802-03:00"
     },
     "18109245578580860": {
       "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261022/1004241958/leo-recuerda-padre-importancia-recoger-galardon.html",
@@ -622,7 +626,7 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:27.986306-03:00"
+      "actualizado": "2026-10-24T04:34:17.630457-03:00"
     },
     "18103067855148047": {
       "key": "news:https://news.google.com/rss/articles/CBMivwFBVV95cUxOczF0R0k2OHBzcXN0Q015Z0w0akRKUEFyeFV0aWQyM254QXlzQzc3TENTa1ZqV3p3UmF3clFlYmZIRjVVTTg2a3BWRG9RTEF3cFJNMVdRNnJlYjFuSDgtQVAtb0ktbnZTckl6WXZOZTZHaDkza0hVaV9Zd0h2aHlGV056QWYzZ2pWOFVWWW5vbVVVcUNCeS1ocVRLeU5EdS1aSnBwc0RPOURZVzhCQlFnUjVjS0Q5bjFHMVBhY2diRdIBvwFBVV95cUxOczF0R0k2OHBzcXN0Q015Z0w0akRKUEFyeFV0aWQyM254QXlzQzc3TENTa1ZqV3p3UmF3clFlYmZIRjVVTTg2a3BWRG9RTEF3cFJNMVdRNnJlYjFuSDgtQVAtb0ktbnZTckl6WXZOZTZHaDkza0hVaV9Zd0h2aHlGV056QWYzZ2pWOFVWWW5vbVVVcUNCeS1ocVRLeU5EdS1aSnBwc0RPOURZVzhCQlFnUjVjS0Q5bjFHMVBhY2diRQ?oc=5",
@@ -634,7 +638,7 @@
       "metricas": {
         "likes": 0,
         "comments": 0,
-        "reach": 3,
+        "reach": 4,
         "views": 14,
         "saved": 0,
         "shares": 0,
@@ -642,7 +646,127 @@
         "follows": 0,
         "profile_visits": 0
       },
-      "actualizado": "2026-10-23T04:53:28.289580-03:00"
+      "actualizado": "2026-10-24T04:34:18.013990-03:00"
+    },
+    "18023497937722658": {
+      "key": "news:https://www.mundodeportivo.com/futbol/fc-barcelona/20261023/1004242373/fermin-cansa-poco-discurso-madrid.html",
+      "tipo": "noticia",
+      "titulo": "Fermín: \"Cansa un poco el discurso del Madrid\"",
+      "fecha": "2026-10-23T18:00:31-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De2eT6Xjytw/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 0,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:10.875525-03:00"
+    },
+    "18153228325490780": {
+      "key": "news:https://news.google.com/rss/articles/CBMi2gFBVV95cUxQTHlRMFo1UHFZWnlFQWMzNEhQRi1YdkROWlNaNnNBT2x5aDRFdnR3eEp2RHNEMGlLVG1raEcyaElCNU5ibFlGeGZwWVVMa0x6cy1xMVFVUU50RUxnTldDRkVacVVrWTVoMWN0UmtVRVpiZkRFOFJ6ZUdQVWNkNkdUYmpHcUxiSW9TNU14TjFEOGpWcGpBVnRSQndDRDBtN2lLRmlXdTM0QWhOenJHcWZGd0pBdUNaUDVsb3NNRTJ4LUpnNDRZOEpFN1ZwX2dVeHc1TUJ0UzhjbGZqdw?oc=5",
+      "tipo": "noticia",
+      "titulo": "¡De 'espaldinha'!: Cristiano Ronaldo sorprende al mundo del fútbol con su gol 982 y se acerca a los 1.000",
+      "fecha": "2026-10-23T13:53:08-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De2CAFCmvQj/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 4,
+        "views": 8,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:11.196210-03:00"
+    },
+    "18035256044853427": {
+      "key": "agenda:2026-10-23",
+      "tipo": "agenda",
+      "titulo": "Agenda 2026-10-23",
+      "fecha": "2026-10-23T13:52:02-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De2B33aHBDi/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 2,
+        "views": 3,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:11.463609-03:00"
+    },
+    "18370695589246468": {
+      "key": "news:https://www.mundodeportivo.com/futbol/internacional/20261023/1004242350/susto-bayern-kompany-trasladado-hospital-desplomarse-entreno.html",
+      "tipo": "noticia",
+      "titulo": "Susto en el Bayern: Kompany, trasladado al hospital tras desplomarse después del entreno",
+      "fecha": "2026-10-23T13:07:01-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De18uTylrjf/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 5,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:11.804577-03:00"
+    },
+    "18132573361688523": {
+      "key": "news:https://www.bbc.co.uk/sport/football/articles/cmwyql6v5q82o?at_medium=RSS&at_campaign=rss",
+      "tipo": "noticia",
+      "titulo": "Arsenal fear Saka could be out for two months",
+      "fecha": "2026-10-23T11:51:01-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De10BzMlCwM/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 3,
+        "views": 8,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:12.067456-03:00"
+    },
+    "18110272589228248": {
+      "key": "news:https://www.mundodeportivo.com/futbol/valencia/20261023/1004242300/peter-lim-vende-42-valencia-pitchwise-holdings.html",
+      "tipo": "noticia",
+      "titulo": "Peter Lim vende el 42% del Valencia a Pitchwise Holdings",
+      "fecha": "2026-10-23T10:50:21-03:00",
+      "formato": "IMAGE",
+      "permalink": "https://www.instagram.com/p/De1tFSTlDit/",
+      "metricas": {
+        "likes": 0,
+        "comments": 0,
+        "reach": 1,
+        "views": 2,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      },
+      "actualizado": "2026-10-24T04:34:12.416565-03:00"
     }
   }
 }
