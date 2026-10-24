@@ -1,14 +1,5 @@
 [
   {
-    "key": "news:https://www.mundodeportivo.com/futbol/serie-a/20261024/1004242765/vibrante-empate-napoles-roma-chilena-incluida-diego-armando-maradona.html",
-    "title": "Vibrante empate entre Nápoles y Roma con chilena incluida en el Diego Armando Maradona",
-    "image": "posts/2026-10-24/1556-napoli-y-roma-se-reparten-seis-goles-en-.jpg",
-    "caption": "Seis goles, dos remontadas y una chilena en el Maradona ⚽\nNapoli y Roma firmaron un 3-3 de locura en el partido del día de la Serie A.\nEl Napoli se puso 2-0 y luego 3-2, pero no supo cerrar el partido y se queda con un punto que le sabe a poco.\nMcTominay brilló por el local y el argentino Leonardo Balerdi fue la gran figura de la visita.\n¿Punto ganado para la Roma o dos puntos perdidos para el Napoli? Mándaselo a tu amigo napolitano.\n\n📰 Fuente: Mundo Deportivo\n\n📷 Fondo: Krzysztof Popławski / CC BY 4.0 · Wikimedia Commons\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #SerieA #NapoliRoma #Napoli #ASRoma #McTominay",
-    "created": "2026-10-24T15:56:10.175033-03:00",
-    "story": "posts/2026-10-24/1556-napoli-y-roma-se-reparten-seis-goles-en--historia.jpg",
-    "attempts": 2
-  },
-  {
     "key": "match:eng.1-401878767",
     "title": "Chelsea vs Tottenham Hotspur",
     "caption": "El Tottenham conquistó Stamford Bridge en los últimos 15 minutos 🔥\nEl 0-1 llegó al 77' con un gol en contra de Mike Penders.\nMathys Tel sentenció al 87' para el 0-2 final.\nLos Spurs dominaron con 68,5% de posesión y 15 remates, mantuvieron la valla invicta y el Chelsea terminó con una roja.\n¿Fue mérito del Tottenham o demérito de un Chelsea que apenas tuvo la pelota?\n\nDesliza para ver cómo fue 👉\n\n📰 Fuente: ESPN\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #Chelsea #TottenhamHotspur #PremierLeague\n\n📷 Foto: Daniel from Glasgow, United Kingdom / CC BY 2.0 · Wikimedia Commons",
@@ -19,7 +10,7 @@
     ],
     "created": "2026-10-24T16:11:32.415492-03:00",
     "story": "posts/2026-10-24/final-chelsea-spurs-historia.jpg",
-    "attempts": 1
+    "attempts": 2
   },
   {
     "key": "match:ita.1-401874948",
@@ -31,6 +22,7 @@
       "posts/2026-10-24/final-napoli-as-roma-2.jpg"
     ],
     "created": "2026-10-24T16:26:40.117617-03:00",
-    "story": "posts/2026-10-24/final-napoli-as-roma-historia.jpg"
+    "story": "posts/2026-10-24/final-napoli-as-roma-historia.jpg",
+    "attempts": 1
   }
 ]
