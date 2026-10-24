@@ -1,18 +1,5 @@
 [
   {
-    "key": "match:eng.1-401878768",
-    "title": "Arsenal vs Everton",
-    "caption": "El Emirates vio otra tarde sin goles en contra para el Arsenal 🔴\nEzri Konsa abrió el marcador muy temprano, al minuto 7.\nGabriel Magalhães sentenció al 68' para el 2-0 definitivo.\nDominio total: 58% de posesión, 20 remates y 12 córners contra apenas 3 del Everton.\n¿Es la defensa del Arsenal la mejor de la Premier ahora mismo?\n\nDesliza para ver cómo fue 👉\n\n📰 Fuente: ESPN\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #Arsenal #Everton #PremierLeague\n\n📷 Foto: Arne Müseler / CC BY-SA 3.0 de · Wikimedia Commons",
-    "reel": "posts/2026-10-24/final-arsenal-everton.mp4",
-    "images": [
-      "posts/2026-10-24/final-arsenal-everton.jpg",
-      "posts/2026-10-24/final-arsenal-everton-2.jpg"
-    ],
-    "created": "2026-10-24T15:18:49.974610-03:00",
-    "story": "posts/2026-10-24/final-arsenal-everton-historia.jpg",
-    "attempts": 2
-  },
-  {
     "key": "match:eng.1-401878767",
     "title": "Chelsea vs Tottenham Hotspur",
     "caption": "El derbi de Londres se decidió en los últimos 15 minutos y fue todo para los Spurs. ⚡\nEl 0-1 llegó al 77' con un autogol de Mike Penders y Mathys Tel sentenció al 87'.\nTottenham dominó con 68,5% de posesión y 15 remates, y se fue con la valla invicta.\nChelsea terminó con una roja y apenas 7 remates en casa.\n¿El Chelsea perdió el derbi por la expulsión o por su falta de ideas con el balón?\n\nDesliza para ver cómo fue 👉\n\n📰 Fuente: ESPN\n\n⚽ @pasefiltradonews · fútbol sin relleno\n\n#futbol #pasefiltradonews #noticiasdefutbol #Chelsea #TottenhamHotspur #PremierLeague\n\n📷 Foto: Daniel from Glasgow, United Kingdom / CC BY 2.0 · Wikimedia Commons",
@@ -23,7 +10,7 @@
     ],
     "created": "2026-10-24T15:25:59.051596-03:00",
     "story": "posts/2026-10-24/final-chelsea-spurs-historia.jpg",
-    "attempts": 1
+    "attempts": 2
   },
   {
     "key": "match:ita.1-401874948",
@@ -35,6 +22,7 @@
       "posts/2026-10-24/final-napoli-as-roma-2.jpg"
     ],
     "created": "2026-10-24T15:41:12.241495-03:00",
-    "story": "posts/2026-10-24/final-napoli-as-roma-historia.jpg"
+    "story": "posts/2026-10-24/final-napoli-as-roma-historia.jpg",
+    "attempts": 1
   }
 ]
