@@ -93,6 +93,15 @@ def refresh_token() -> None:
     print(f"Nuevo token (vence en {r['expires_in'] // 86400} días):\n{r['access_token']}")
 
 
+BLOQUEO_HORAS = 3
+
+
+def es_bloqueo(e: Exception) -> bool:
+    """Instagram frena la cuenta ('request limit reached' / 'action is blocked'): insistir lo alarga."""
+    t = str(e)
+    return "'code': 4" in t or "2207051" in t or "action is blocked" in t
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--refresh-token", action="store_true", help="renueva el token de larga duración")
@@ -116,15 +125,27 @@ def main() -> None:
         else:
             pending.append(entry)
     history = load("history.json", [])
+    estado = load("estado.json", {})
+    hasta = estado.get("ig_bloqueo")
+    if hasta and dt.datetime.fromisoformat(hasta) > dt.datetime.now(TZ):
+        print(f"[pausa] Instagram bloqueó las publicaciones; se reintenta después de {hasta}")
+        return
     failed = []
+    bloqueado = False
     for i, entry in enumerate(pending):
-        if i >= args.max:
+        if bloqueado or i >= args.max:
             failed.append(entry)  # queda para la próxima ejecución
             continue
         try:
             media_id = publish_entry(entry, base)
         except (RuntimeError, requests.RequestException) as e:
             print(f"[error] {entry['key']}: {e}")
+            if es_bloqueo(e):
+                bloqueado = True
+                estado["ig_bloqueo"] = (dt.datetime.now(TZ) + dt.timedelta(hours=BLOQUEO_HORAS)).isoformat()
+                save("estado.json", estado)
+                failed.append(entry)  # no cuenta como intento: el problema es de la cuenta, no del post
+                continue
             entry["attempts"] = entry.get("attempts", 0) + 1
             if entry["attempts"] < 3:
                 failed.append(entry)
