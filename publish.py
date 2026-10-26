@@ -113,6 +113,10 @@ def main() -> None:
     if args.check:
         return check()
 
+    if CFG.get("publicacion_pausada"):
+        print("[pausa] publicación pausada por el dueño (config.json: publicacion_pausada)")
+        return
+
     base = os.environ["PUBLIC_BASE_URL"].rstrip("/")
     # GitHub sirve los .mp4 como application/octet-stream; jsDelivr los sirve como video/mp4
     video_base = os.environ.get("VIDEO_BASE_URL", base).rstrip("/")
