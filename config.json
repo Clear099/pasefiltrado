@@ -22,8 +22,8 @@
     18
   ],
   "instant_min_interest": 14,
-  "instant_max_per_day": 3,
-  "max_posts_per_day": 8,
+  "instant_max_per_day": 2,
+  "max_posts_per_day": 6,
   "pending_max_hours": 6,
   "presupuesto_mensual_usd": 30,
   "comentarios": {
